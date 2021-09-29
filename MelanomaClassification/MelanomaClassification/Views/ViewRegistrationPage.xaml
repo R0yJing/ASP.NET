@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MelanomaClassification.Views.ViewRegistrationPage">
+ 
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout>
+                <Entry x:Name="EmailEntry" Placeholder="Enter email" />
+                <Entry x:Name="PswdEntry" Placeholder="Enter password" />
+                <Entry x:Name="ConfmPswdEntry" Placeholder="Confirm password" />
+                <Button Text="Register" Command="{Binding Register}" />
+                <ActivityIndicator x:Name="LoadingSymbol" IsRunning="false" VerticalOptions="Center" HorizontalOptions="Center" />
+            </StackLayout>
+            <ContentView x:Name="Loading" IsVisible="false" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ActivityIndicator IsRunning="false" />
+            </ContentView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

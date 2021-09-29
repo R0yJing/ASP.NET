@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MelanomaClassification.Views.ViewLoginPage">
+
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout x:Name="mainScreen" >
+                <Entry x:Name="UsernameEntry" Placeholder="Enter email"/>
+                <Entry x:Name="PasswordEntry" Placeholder="Enter password" />
+                <Button Command="{Binding OnTapLogin}" Text="Login!"/>
+                <Label TextDecorations="Underline" TextColor="Blue" x:Name="RegisterLink"
+                       Text="Don't have an account? Register today!" />
+            </StackLayout>
+                    <ContentView IsVisible="false" x:Name="LoggingInIndicator">
+                        <StackLayout>
+                            <ActivityIndicator />
+                            <Label Text="Logging in, please wait..." />
+                        </StackLayout>
+                    </ContentView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

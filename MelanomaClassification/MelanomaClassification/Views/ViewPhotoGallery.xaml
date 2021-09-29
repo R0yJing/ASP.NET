@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MelanomaClassification.Views.ViewPhotoGallery">
+             
+    <ContentPage.Content>
+        
+        <StackLayout>
+           
+            <Label Text="Classification History" FontSize="25" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+            <CarouselView x:Name="ImageHistory" ItemsSource="{Binding imageHistory}" Loop="False">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        
+                        <Frame HasShadow="True" BorderColor="DarkGray" HeightRequest="300">
+                            <RelativeLayout>
+                                
+                                <Image x:Name="{Binding thisImage}"  Source="{Binding source}" Aspect="AspectFit" />
+                                <Label Text="{Binding result}" />
+                                <Label Text="{Binding date}" />
+                                
+                                <Button x:Name="myBtn" Text="Delete this" Command="{Binding Delete}" CommandParameter="{Binding imageData}" />
+
+                            </RelativeLayout>
+                                
+                           
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <Button Text="Import More Photos" Command="{Binding OnImport}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
