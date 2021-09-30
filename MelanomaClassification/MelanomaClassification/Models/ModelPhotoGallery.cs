@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using System.Drawing;
 using Xamarin.Essentials;
 using MelanomaClassification.Services;
+using System.Collections.ObjectModel;
 
 namespace MelanomaClassification.Models
 {
@@ -16,7 +17,7 @@ namespace MelanomaClassification.Models
     {
        
         Dictionary<Image, Stream> imagesToStreams = new Dictionary<Image, Stream>();
-
+        public static ObservableCollection<ModelPredictionWrapper> NewPredictions = new ObservableCollection<ModelPredictionWrapper>();
         public Image AddPairToDict( Image image, Stream stream )
         {
             imagesToStreams.Add(image, stream);
@@ -24,29 +25,22 @@ namespace MelanomaClassification.Models
 
         }
 
-        
-        public async Task<ModelResult> ImportPhotoAsync()
+        public ObservableCollection<ModelPredictionWrapper> GetAndRemoveNewPredictions()
+        {
+            var temp = new ObservableCollection<ModelPredictionWrapper>(NewPredictions);
+            NewPredictions.Clear();
+            return temp;
+        }
+        public async Task<ModelPredictionWrapper> ImportPhotoAsync()
         {
             //MediaPicker.CapturePhotoAsync(new MediaPickerOptions());
 
-            var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
-            {
-                Title = "Pick a photo"
-            });
-
-           
-
+            var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions());
             var stream = await result.OpenReadAsync(); 
-            MemoryStream savedStream = new MemoryStream();
-          
+           
             Console.WriteLine("stream returned");
-            
-            ModelResult mResult = new ModelResult
-            {
-                imageData = DependencyService.Get<ImageUtilityService>().GetByteArrFromImageStream(stream)
-            };
-
-            return mResult;
+            return new ImageUtilityService().CreatePredictionWrapper(stream);
+           
         }
 
         

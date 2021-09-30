@@ -24,31 +24,9 @@ namespace MelanomaClassification.Views
         public ViewCamera()
         {
             InitializeComponent();
-            ClassifierServiceFactory.SetClassifier(DependencyService.Get<ILocalImageClassifierService>());
+            ClassifierServiceFactory.SetClassifier(DependencyService.Get<ILocalClassifierService>());
 
             BindingContext = this;
-            
-            takePhotoBtn.Clicked += (async (object sender, EventArgs args) =>
-            {
-
-                Console.WriteLine("taking photo");
-                _ = await CrossMedia.Current.Initialize();
-
-                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-                {
-                    Console.WriteLine("take photo is not supported");
-                    return;
-                }
-                var storeCamerMediaOptions = new StoreCameraMediaOptions()
-                {
-                    SaveToAlbum = true,
-                };
-                MediaFile photoFile = await CrossMedia.Current.TakePhotoAsync(storeCamerMediaOptions);
-                var predict = await factory.GetClassifierService().MakePredictions(photoFile.GetStream());
-                pCamera.DisplayPrediction(predict);
-
-            });
-
             pCamera = new PresenterCamera(this);
             
 
@@ -56,6 +34,33 @@ namespace MelanomaClassification.Views
         public void TakePhoto()
         {
             throw new NotImplementedException();
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            _ = await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                Console.WriteLine("take photo is not supported");
+                return;
+            }
+            var storeCamerMediaOptions = new StoreCameraMediaOptions()
+            {
+                SaveToAlbum = true,
+            };
+
+            MediaFile photoFile = await CrossMedia.Current.TakePhotoAsync(storeCamerMediaOptions);
+            var predict = await factory.GetClassifierService().MakePredictions(photoFile.GetStream());
+            var data = new ImageUtilityService().CreatePredictionWrapper(photoFile.GetStream(), predict);
+            
+            pCamera.DisplayPrediction(predict);
+            ModelPhotoGallery.NewPredictions.Add(data);
+            
+
+
         }
 
 

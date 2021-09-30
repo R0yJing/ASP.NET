@@ -16,6 +16,8 @@ namespace MelanomaClassification.Services
         
         }
 
+        public void SetClassifierService(IClassifierService service) => ConcreteService = service;
+
 
     }
 }

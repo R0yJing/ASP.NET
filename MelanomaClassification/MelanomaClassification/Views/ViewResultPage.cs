@@ -42,6 +42,12 @@ namespace MelanomaClassification.Views
             //go back to the camera page
             await Shell.Current.GoToAsync(nameof(ViewCamera));
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            
+        }
         public string Result
         {
 

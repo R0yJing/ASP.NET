@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MelanomaClassification.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -26,7 +27,17 @@ namespace MelanomaClassification.Services
             
         }
 
+        public ModelPredictionWrapper CreatePredictionWrapper(Stream stream, ModelPrediction predict = null)
+        {
+            byte[] imageRawData = GetByteArrFromImageStream(stream);
 
-
+            var data = new ModelPredictionWrapper
+            {
+                ImageData = imageRawData,
+                Date = DateTime.Now.ToString("dd/MM/yyyy"),
+                Prediction = predict
+            };
+            return data;
+        }
     }
 }

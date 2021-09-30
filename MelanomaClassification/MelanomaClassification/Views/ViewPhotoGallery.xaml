@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MelanomaClassification.Views.ViewPhotoGallery">
+             x:Class="MelanomaClassification.Views.ViewPhotoGallery"
+             x:Name="ThisPage">
              
     <ContentPage.Content>
         
@@ -13,15 +14,21 @@
                     <DataTemplate>
                         
                         <Frame HasShadow="True" BorderColor="DarkGray" HeightRequest="300">
-                            <RelativeLayout>
+                            <StackLayout>
                                 
-                                <Image x:Name="{Binding thisImage}"  Source="{Binding source}" Aspect="AspectFit" />
-                                <Label Text="{Binding result}" />
-                                <Label Text="{Binding date}" />
-                                
-                                <Button x:Name="myBtn" Text="Delete this" Command="{Binding Delete}" CommandParameter="{Binding imageData}" />
+                                <Image Source="{Binding source}" Aspect="AspectFit" />
+                                <Label Text="{Binding Tag}" />
+                                <Label Text="{Binding Prob}" />
+                                <Label Text="{Binding Date}" />
+                                <Button x:Name="ClassifyButton" Text="Classify again"
+                                        Command="{Binding Source={x:Reference Name=ThisPage},
+                                        Path=BindingContext.Classify}" CommandParameter="{Binding ImageData}" />
+                              
+                                <Button x:Name="DeleteButton" Text="Delete this" 
+                                        Command="{Binding Source={x:Reference Name=ThisPage},
+                                        Path=BindingContext.Delete}" CommandParameter="{Binding .}" />
 
-                            </RelativeLayout>
+                            </StackLayout>
                                 
                            
                         </Frame>

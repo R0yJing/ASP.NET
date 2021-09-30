@@ -9,6 +9,7 @@ using Plugin.Media.Abstractions;
 using MelanomaClassification.Models;
 using System.IO;
 using System.Threading.Tasks;
+using Xamarin.Forms.Internals;
 
 namespace MelanomaClassification.Presenters
 {
@@ -38,7 +39,7 @@ namespace MelanomaClassification.Presenters
         {
             try
             {
-                vPhotoGallery.AddImage(await mPhotoGallery.ImportPhotoAsync());
+                vPhotoGallery.AddPrediction(await mPhotoGallery.ImportPhotoAsync());
             } catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
@@ -46,6 +47,8 @@ namespace MelanomaClassification.Presenters
             }
         }
 
-       
+        public void AddNewPredictionsIfAny() => 
+            mPhotoGallery.GetAndRemoveNewPredictions().ForEach(Element => vPhotoGallery.AddPrediction(Element));
+
     }
 }

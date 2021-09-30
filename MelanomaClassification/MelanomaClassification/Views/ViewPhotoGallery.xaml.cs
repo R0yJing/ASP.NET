@@ -20,17 +20,18 @@ namespace MelanomaClassification.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewPhotoGallery : ContentPage
     {
-        private ObservableCollection<ModelResult> imageHistory = new ObservableCollection<ModelResult>();
+        private ObservableCollection<ModelPredictionWrapper> imageHistory = new ObservableCollection<ModelPredictionWrapper>();
         private ClassifierServiceFactory factory;
-
+        public static ViewPhotoGallery self;
         public ICommand Delete
         {
-            get { return new Command<ModelResult>(Remove); }
+            get { return new Command<ModelPredictionWrapper>(Remove); }
         }
-        public void Remove(ModelResult self)
+        public void Remove(ModelPredictionWrapper self)
         {
             Console.WriteLine("deleting");
             imageHistory.Remove(self);
+            
         }
 
         public Button btn = new Button();
@@ -41,13 +42,15 @@ namespace MelanomaClassification.Views
             {
                 return new Command(async (chosenImageData) =>
                 {
-                    MemoryStream stream = new MemoryStream((byte[])chosenImageData);
-                    ModelPrediction predict = await factory.GetClassifierService().MakePredictions(stream);
+
+                    ModelPrediction predict = await factory.GetClassifierService().MakePredictions(new MemoryStream((byte[])chosenImageData));
                     await Shell.Current.GoToAsync($"{nameof(ViewResultPage)}?resultId={predict.Tag}");
                 });
             }
         }
-        public ICommand OnImport { get; }
+
+        public ICommand OnImport { get { return new Command(() => pPhotoGallery.ImportImage()); } }
+        
         private PresenterPhotoGallery pPhotoGallery;
         
         public ViewPhotoGallery()
@@ -55,34 +58,19 @@ namespace MelanomaClassification.Views
             InitializeComponent();
             
             pPhotoGallery = new PresenterPhotoGallery(this);
-            
-            OnImport = new Command(() =>
-            {
-                pPhotoGallery.ImportImage();
-            });
-
-            ImageHistory.ItemsSource = imageHistory;
             BindingContext = this;
+           
         }
 
-      
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            foreach (ModelResult res in imageHistory)
-            {
-                res.source = ImageSource.FromStream(() => new MemoryStream(res.imageData));
-            }
+            pPhotoGallery.AddNewPredictionsIfAny();
         }
 
+        public void AddPrediction(ModelPredictionWrapper data) => imageHistory.Add(data);
 
-        public void AddImage(ModelResult res)
-        {
-
-            res.source = ImageSource.FromStream(() => new MemoryStream(res.imageData));
-            imageHistory.Add(res);
-
-        }
+        
 
 
     }

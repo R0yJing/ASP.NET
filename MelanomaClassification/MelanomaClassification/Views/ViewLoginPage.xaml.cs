@@ -24,7 +24,7 @@ namespace MelanomaClassification.Views
                 {
                     Console.WriteLine("logging in");
                     LoggingInIndicator.IsVisible = true;
-                    bool loggedIn = await new UserService().LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+                    bool loggedIn = true; // await new UserService().LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
                     LoggingInIndicator.IsVisible = false;
                     if (loggedIn)
                     {

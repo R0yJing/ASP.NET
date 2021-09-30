@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using MelanomaClassification.Models;
+﻿
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace MelanomaClassification.Services
 {
@@ -51,28 +48,22 @@ namespace MelanomaClassification.Services
         }
         public async Task<bool> RegisterAsync(string username, string pswd, string confmPswd)
         {
-            var newAccount = new ModelAccount
+            var newAccount = new Models.RegisterBindingModel
             {
                 Email = username,
                 Password = pswd,
                 ConfirmPassword = confmPswd
             };
-
-          
-            
             var json = JsonConvert.SerializeObject(newAccount);
             HttpContent content = new StringContent(json);
 
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json")
-            { 
-                CharSet = Encoding.UTF8.WebName
-            };
-
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             try
             {
 
-                var response = await client.PostAsync(androidRegisterUrl, content);
+                var response = await client.PostAsync("http://10.0.2.2:60268/api/Account/Register", content);
                 Console.WriteLine(response.ToString());
+
                 Console.WriteLine(response.ReasonPhrase);
                 Console.WriteLine(response);
                 return response.IsSuccessStatusCode;

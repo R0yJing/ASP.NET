@@ -17,7 +17,7 @@ using MelanomaClassification.Models;
 [assembly: Dependency(typeof(MelanomaClassification.Droid.ImageClassifier))]
 namespace MelanomaClassification.Droid
 {
-    public class ImageClassifier : ILocalImageClassifierService
+    public class ImageClassifier : ILocalClassifierService
     {
         private static readonly string ModelFile = "classifier.pb";
         private static readonly string LabelFile = "labels.txt";
@@ -36,6 +36,7 @@ namespace MelanomaClassification.Droid
             _inferenceInterface.Feed(InputName, floatValues, 1, InputSize, InputSize, 3);
             _inferenceInterface.Run(new[] { OutputName });
             _inferenceInterface.Fetch(OutputName, outputs);
+            //index is 1 or 0
             var index = Array.IndexOf(outputs, outputs.Max());
             ModelPrediction newPrediction = new ModelPrediction
             {

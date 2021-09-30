@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -323,6 +324,9 @@ namespace WebAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
+                Debug.WriteLine("model is invalid");
+                Debug.WriteLine(ModelState);
+
                 return BadRequest(ModelState);
             }
 

@@ -10,13 +10,13 @@ namespace MelanomaClassification.Presenters
 
     public class PresenterLoginPage
     {
-        private ModelAccount mAccount;
+        private RegisterBindingModel mAccount;
         private ViewLoginPage vLogin;
        
         public PresenterLoginPage(ViewLoginPage v)
         {
             vLogin = v;
-            mAccount = new ModelAccount();
+            mAccount = new RegisterBindingModel();
             
         }
     }
