@@ -9,14 +9,14 @@
         <StackLayout>
            
             <Label Text="Classification History" FontSize="25" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-            <CarouselView x:Name="ImageHistory" ItemsSource="{Binding imageHistory}" Loop="False">
+            <CarouselView x:Name="ImageHistory" ItemsSource="{Binding Source=imageHistory}" Loop="False">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         
                         <Frame HasShadow="True" BorderColor="DarkGray" HeightRequest="300">
                             <StackLayout>
                                 
-                                <Image Source="{Binding source}" Aspect="AspectFit" />
+                                <Image Source="{Binding Source}" Aspect="AspectFit" />
                                 <Label Text="{Binding Tag}" />
                                 <Label Text="{Binding Prob}" />
                                 <Label Text="{Binding Date}" />

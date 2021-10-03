@@ -1,4 +1,5 @@
 ﻿
+using System.Diagnostics;
 using System.IO;
 using Xamarin.Forms;
 
@@ -14,6 +15,8 @@ namespace MelanomaClassification.Models
         public ImageSource Source
         {
             get {
+                Debug.WriteLine("image data is null?" + ImageData == null);
+
                 return ImageData != null
                 ? ImageSource.FromStream(() => new MemoryStream(ImageData))
                 : throw new System.NullReferenceException("No raw img data found!");

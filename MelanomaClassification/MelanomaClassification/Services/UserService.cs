@@ -56,11 +56,14 @@ namespace MelanomaClassification.Services
             });
         }
 
-        private static async void ConvertRemoteDBItemToSQLItem()
+        private static async void RetrieveFromRemote()
         {
-            var response = client.GetAsync(rootUrl + "/api/UsersPhotos");
-            string serial = await response.Result.Content.ReadAsStringAsync();
+            var response = await client.GetAsync(rootUrl + "/api/UsersPhotos");
             
+            var userData = JsonConvert.DeserializeObject<List<SQL_ModelPrediction>>(await response.Content.ReadAsStringAsync());
+            await DatabaseService.PutAll(userData);
+            Debug.WriteLine("Retrieved all");
+
         }
         public static async Task<bool> LoginAsync(string name, string pswd)
         {
