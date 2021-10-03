@@ -27,7 +27,7 @@ namespace MelanomaClassification.Services
 
         public async Task<ModelPrediction> MakePredictions(Stream photoStream)
         {
-                var content = new ByteArrayContent(imgUtil.GetByteArrFromImageStream(photoStream));
+                var content = new ByteArrayContent(ImageUtilityService.GetByteArrFromImageStream(photoStream));
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
                 var response = await client.PostAsync(endpointUrl, content);
                 var responseStr = await response.Content.ReadAsStringAsync();

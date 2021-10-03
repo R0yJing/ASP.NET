@@ -11,12 +11,12 @@ namespace MelanomaClassification
         {
 
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ViewLoginPage), typeof(ViewLoginPage));
-            Routing.RegisterRoute(nameof(ViewCamera), typeof(ViewCamera));
-            Routing.RegisterRoute(nameof(ViewAccount), typeof(ViewAccount));
+            //Routing.RegisterRoute(nameof(ViewLoginPage), typeof(ViewLoginPage));
+            //Routing.RegisterRoute(nameof(ViewCamera), typeof(ViewCamera));
+            //Routing.RegisterRoute(nameof(ViewAccountPage), typeof(ViewAccountPage));
             Routing.RegisterRoute(nameof(ViewRegistrationPage), typeof(ViewRegistrationPage));
             Routing.RegisterRoute(nameof(ViewResultPage), typeof(ViewResultPage));
-            Routing.RegisterRoute(nameof(ViewPhotoGallery), typeof(ViewPhotoGallery));
+            //Routing.RegisterRoute(nameof(ViewPhotoGallery), typeof(ViewPhotoGallery));
 
         }
 

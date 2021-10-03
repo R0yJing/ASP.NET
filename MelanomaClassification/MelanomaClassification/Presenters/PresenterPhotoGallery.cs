@@ -10,6 +10,7 @@ using MelanomaClassification.Models;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
+using MelanomaClassification.Services;
 
 namespace MelanomaClassification.Presenters
 {
@@ -18,7 +19,7 @@ namespace MelanomaClassification.Presenters
         //private static PresenterCamera pCamera;
         private ViewPhotoGallery vPhotoGallery;
         private ModelPhotoGallery mPhotoGallery;
-
+       
         /*public static void AddPresenterCamera(PresenterCamera pCam)
         {
             pCamera = pCam;
@@ -39,7 +40,18 @@ namespace MelanomaClassification.Presenters
         {
             try
             {
-                vPhotoGallery.AddPrediction(await mPhotoGallery.ImportPhotoAsync());
+                var predict = await mPhotoGallery.ImportPhotoAsync();
+                foreach (var wrapper in vPhotoGallery.GetAllData())
+                {
+                    if (Enumerable.SequenceEqual(wrapper.ImageData, predict.ImageData))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Duplicate image", "This image is already imported!", "OK");
+                        return;
+                    }
+                }
+                vPhotoGallery.AddPrediction(predict);
+                DatabaseService.PutAsync(predict);
+
             } catch(Exception e)
             {
                 Console.WriteLine(e.ToString());

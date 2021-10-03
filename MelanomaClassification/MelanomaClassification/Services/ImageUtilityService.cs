@@ -8,7 +8,7 @@ namespace MelanomaClassification.Services
 {
     public class ImageUtilityService
     {
-        public byte[] GetByteArrFromImageStream(Stream sIn)
+        public static byte[] GetByteArrFromImageStream(Stream sIn)
         {
             //16384 = 16 x 1024
             /*var buff = new byte[16384];
@@ -27,7 +27,7 @@ namespace MelanomaClassification.Services
             
         }
 
-        public ModelPredictionWrapper CreatePredictionWrapper(Stream stream, ModelPrediction predict = null)
+        public static ModelPredictionWrapper CreatePredictionWrapper(Stream stream, ModelPrediction predict = null)
         {
             byte[] imageRawData = GetByteArrFromImageStream(stream);
 

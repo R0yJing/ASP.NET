@@ -40,19 +40,16 @@ namespace MelanomaClassification.Views
         public async void Reclassify()
         {
             //go back to the camera page
-            await Shell.Current.GoToAsync(nameof(ViewCamera));
+            var thisPage= await Navigation.PopAsync();
+            if (nameof(thisPage) == nameof(ViewPhotoGallery)) {
+               await Shell.Current.GoToAsync(nameof(ViewCamera));
+
+            }
         }
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            
-        }
         public string Result
         {
-
-            set { pResultPage.LoadResult(value); }
-           
+            set => pResultPage.LoadResult(value);
         }
 
         public void SetVisAid(Image p)
@@ -63,6 +60,7 @@ namespace MelanomaClassification.Views
 
         public void SetResultText(string v)
         {
+
             resultLbl.Text = v;
         }
 

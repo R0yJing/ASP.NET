@@ -86,3 +86,5 @@ C:\Users\Roy\Desktop\MobSysDev\MelanomaApp\MelanomaClassification\MelanomaClassi
 C:\Users\Roy\Desktop\MobSysDev\MelanomaApp\MelanomaClassification\MelanomaClassification\bin\Debug\netstandard2.0\Assets\Malign\ISIC_2358454.jpg
 C:\Users\Roy\Desktop\MobSysDev\MelanomaApp\MelanomaClassification\MelanomaClassification\bin\Debug\netstandard2.0\Assets\Malign\ISIC_2406492.jpg
 C:\Users\Roy\Desktop\MobSysDev\MelanomaApp\MelanomaClassification\MelanomaClassification\bin\Debug\netstandard2.0\Assets\Malign\ISIC_2408815.jpg
+C:\Users\Roy\Desktop\MobSysDev\MelanomaApp\MelanomaClassification\MelanomaClassification\obj\Debug\netstandard2.0\MelanomaClassification.csproj.AssemblyReference.cache
+C:\Users\Roy\Desktop\MobSysDev\MelanomaApp\MelanomaClassification\MelanomaClassification\obj\Debug\netstandard2.0\Views\ViewUserInfo.xaml.g.cs

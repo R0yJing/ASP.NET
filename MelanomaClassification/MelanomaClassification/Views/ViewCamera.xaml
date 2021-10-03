@@ -3,17 +3,4 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MelanomaClassification.Views.ViewCamera" >
 
-    <ContentPage.Content>
-      
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Image x:Name="imageTaken" />
-            <Button x:Name="takePhotoBtn"  Text="Press to take photo" Grid.Row="1"/>
-          
-        </Grid>
-    </ContentPage.Content>
-    
 </ContentPage>

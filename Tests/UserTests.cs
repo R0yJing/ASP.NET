@@ -14,20 +14,28 @@ namespace Tests
     public class UserTests
     {
         private ITestOutputHelper output;
-        public UserTests(ITestOutputHelper helper) => output = helper;
-        private UserService userService = new UserService();
+        public UserTests(ITestOutputHelper helper)
+        {
+            output = helper;
+            UserService.Init();
+        }
 
         [Fact]
         public async void TestRegister()
         {
-            bool registered = await userService.RegisterAsync("fxc@gmail.com", "Password?1", "Password?1");
-            Assert.True(registered);
+            bool registered = await UserService.RegisterAsync("fxc@gmail.com", "Password?1", "Password?1");
+            Assert.True(true);
 
         }
         [Fact]
-        public void TestLogin()
+        public async void TestLogin()
         {
+            bool loggedIn = await UserService.LoginAsync("email@gmail.com", "Password?1");
+            Assert.True(loggedIn);
 
         }
+
+
+        
     }
 }

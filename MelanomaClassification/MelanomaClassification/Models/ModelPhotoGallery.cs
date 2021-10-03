@@ -39,7 +39,7 @@ namespace MelanomaClassification.Models
             var stream = await result.OpenReadAsync(); 
            
             Console.WriteLine("stream returned");
-            return new ImageUtilityService().CreatePredictionWrapper(stream);
+            return ImageUtilityService.CreatePredictionWrapper(stream);
            
         }
 

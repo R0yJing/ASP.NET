@@ -6,6 +6,9 @@ namespace MelanomaClassification.Models
 {
     public class ModelPredictionWrapper
     {
+        public static int nextId = 0;
+        
+        public int Id;
         public ModelPrediction Prediction { private get; set; }
         public byte[] ImageData { get; set; }
         public ImageSource Source
@@ -19,7 +22,10 @@ namespace MelanomaClassification.Models
         public string Tag { get { return Prediction?.Tag; } }
         public string Prob { get { return "" + Prediction?.Probability; } }
         public string Date { get; set; }
-        public ModelPredictionWrapper self { get {return this;} }
-        
+        public int ItemID { get; set; }
+        public ModelPredictionWrapper()
+        {
+            Id = nextId++;
+        }
     }
 }

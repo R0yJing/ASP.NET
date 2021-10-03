@@ -5,17 +5,19 @@
 
     <ContentPage.Content>
         <Grid>
-            <StackLayout x:Name="mainScreen" >
+            <StackLayout x:Name="mainScreen">
                 <Entry x:Name="UsernameEntry" Placeholder="Enter email"/>
                 <Entry x:Name="PasswordEntry" Placeholder="Enter password" />
                 <Button Command="{Binding OnTapLogin}" Text="Login!"/>
                 <Label TextDecorations="Underline" TextColor="Blue" x:Name="RegisterLink"
                        Text="Don't have an account? Register today!" />
             </StackLayout>
-                    <ContentView IsVisible="false" x:Name="LoggingInIndicator">
+                    <ContentView IsVisible="False" x:Name="LoggingInIndicator">
                         <StackLayout>
-                            <ActivityIndicator />
-                            <Label Text="Logging in, please wait..." />
+                            <ActivityIndicator IsRunning="True"/>
+                            <Label Text="Logging in, please wait..."
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center"/>
                         </StackLayout>
                     </ContentView>
         </Grid>

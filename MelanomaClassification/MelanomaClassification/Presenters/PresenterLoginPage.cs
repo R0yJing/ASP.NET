@@ -19,5 +19,7 @@ namespace MelanomaClassification.Presenters
             mAccount = new RegisterBindingModel();
             
         }
+
+        public void SetUsername(string name) => ModelAccountPage.Username = name;
     }
 }

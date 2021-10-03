@@ -1,6 +1,7 @@
 ﻿using MelanomaClassification.Services;
 using MelanomaClassification.Views;
 using System;
+using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,20 +14,19 @@ namespace MelanomaClassification
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
-        }
-
-        protected override void OnStart()
-        {
+            DatabaseService.Init();
+            UserService.Init();
         }
 
         protected override void OnSleep()
         {
+            base.OnSleep();
+            Debug.WriteLine("Closing app");
+            
+            UserService.UpdateRemote();
+
         }
 
-        protected override void OnResume()
-        {
-        }
     }
 }

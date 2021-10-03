@@ -28,21 +28,20 @@ namespace MelanomaClassification.Presenters
         }
 
        
-        public async void DisplayPrediction(ModelPrediction predict )
+        public async Task<bool> DisplayPrediction(ModelPrediction predict )
         {
             
             try
             {
-               
                 await Shell.Current.GoToAsync($"{nameof(ViewResultPage)}?resultId={predict.Tag}");
             }
             catch (Exception e)
             {
                 await App.Current.MainPage.DisplayAlert("Alert", e.Message, "OK");
-
                 Console.WriteLine(e.Message);
+                return false;
             }
-
+            return true;
 
         }
 

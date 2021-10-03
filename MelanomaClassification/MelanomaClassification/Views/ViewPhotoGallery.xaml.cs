@@ -27,14 +27,21 @@ namespace MelanomaClassification.Views
         {
             get { return new Command<ModelPredictionWrapper>(Remove); }
         }
-        public void Remove(ModelPredictionWrapper self)
+        public async void Remove(ModelPredictionWrapper self)
         {
             Console.WriteLine("deleting");
             imageHistory.Remove(self);
-            
+            bool deleted = await DatabaseService.DeleteData(self.Id);
+            if (deleted) await DisplayAlert("Success", "Deletion succeeded", "OK");
+
         }
 
         public Button btn = new Button();
+
+        public IEnumerable<ModelPredictionWrapper> GetAllData()
+        {
+            return imageHistory;
+        }
 
         public ICommand Classify
         {

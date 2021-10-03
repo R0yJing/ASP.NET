@@ -73,14 +73,5 @@ namespace Tests
                 output.WriteLine("---------------");
             }
         }
-        /*[Fact]
-        public async void OnlinePredict()
-        {
-            WebClassifierService webService = new WebClassifierService();
-            output.WriteLine("tag = " + pred.Tag);
-            output.WriteLine("Probability is " + pred.Probability);
-            Assert.True(true);
-
-        }*/
     }
 }

@@ -52,6 +52,8 @@ namespace MelanomaClassification.Droid
                 var assets = CrossCurrentActivity.Current.Activity.Assets;
 
                 _inferenceInterface = new TensorFlowInferenceInterface(assets, ModelFile);
+                if (_inferenceInterface == null) Console.WriteLine("Could not instantiate tf model");
+
                 using var sr = new StreamReader(CrossCurrentActivity.Current.Activity.Assets.Open(LabelFile));
                 _labels = sr.ReadToEnd().Split("\n").Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).ToArray();
             }

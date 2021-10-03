@@ -6,6 +6,7 @@ namespace MelanomaClassification.Models
 {
     public class ModelResponse
     {
+        
         public string Id { get; set; }
         public string Project { get; set; }
         public string Iteration { get; set; }

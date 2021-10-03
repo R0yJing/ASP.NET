@@ -24,7 +24,10 @@ namespace MelanomaClassification.Views
                 {
                     Console.WriteLine("logging in");
                     LoggingInIndicator.IsVisible = true;
-                    bool loggedIn = true; // await new UserService().LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+                    //bool loggedIn = await new UserService().LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+                    await Task.Delay(2000);
+
+                    bool loggedIn = true;
                     LoggingInIndicator.IsVisible = false;
                     if (loggedIn)
                     {
@@ -33,10 +36,11 @@ namespace MelanomaClassification.Views
                         {
                             await DisplayAlert("Fatal Error", "After Login not found", "OK");
                         }
-                        await Navigation.PushAsync(new ViewCamera());
+                        await Navigation.PushAsync(new ViewAccountPage());
                         Shell.Current.FindByName<TabBar>("AfterLogin").IsVisible = true;
+                        pLoginPage.SetUsername(UsernameEntry.Text);
 
-                        Console.WriteLine("Logging in..." + $"{nameof(ViewCamera)}");
+                        
                     }
                     else
                     {

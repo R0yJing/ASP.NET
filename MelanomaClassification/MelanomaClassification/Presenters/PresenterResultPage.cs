@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using MelanomaClassification.Views;
 using MelanomaClassification.Models;
+using System.IO;
+using System.Diagnostics;
 
 namespace MelanomaClassification.Presenters
 {
@@ -21,6 +23,19 @@ namespace MelanomaClassification.Presenters
 
         public void LoadResult(string prediction)
         {
+            Debug.WriteLine("getting files");
+
+            foreach(var path in Directory.GetFiles(".."))
+            {
+                Debug.WriteLine(path);
+
+            }
+            Debug.WriteLine("Previous dir");
+            foreach (var path in Directory.GetFiles("../Assets"))
+            {
+                Debug.WriteLine(path);
+
+            }
             if (prediction == "Malignant")
             {
                 vResultPage.SetVisAid(mResultPage.GetImage(mResultPage.warningIcon));

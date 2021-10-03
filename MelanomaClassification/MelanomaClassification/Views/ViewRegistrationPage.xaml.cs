@@ -26,7 +26,7 @@ namespace MelanomaClassification.Views
                     //LoadingSymbol.IsRunning = true;
                     Loading.IsVisible = true;
                     LoadingSymbol.IsRunning = true;
-                    var successful = await userService.RegisterAsync(EmailEntry.Text, PswdEntry.Text, ConfmPswdEntry.Text);
+                    var successful = await UserService.RegisterAsync(EmailEntry.Text, PswdEntry.Text, ConfmPswdEntry.Text);
                     LoadingSymbol.IsRunning = false;
                     Loading.IsVisible = false;
                     Console.WriteLine("registered (or not)");

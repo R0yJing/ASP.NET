@@ -1,4 +1,5 @@
 ﻿
+using MelanomaClassification.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,25 +12,59 @@ namespace MelanomaClassification.Services
 {
     public class UserService
     {
-        private const string portNum =      "60268";
-        private string androidRootUrl =     "http://10.0.2.2:"  + portNum;
-        private string iOSRootUrl =         "http://localhost:" + portNum;
-        private string androidRegisterUrl = "http://10.0.2.2:"  + portNum  + "/api/Account/Register";
-        private string iOSApiUrl =          "http://localhost:" + portNum + "/api/Account/Register";
-        private HttpClient client;
-      
-        public UserService()
+        private static string rootUrl { 
+            get 
+            { if (!UnitTestDetector.xunitActive)
+                    return "http://192.168.1.8:45456";
+                else return "http://localhost:44332";
+            }
+            set { }
+        }
+        private static string localHostUrl
+        {
+            get { return "http://localhost:44332";  }
+            set { }
+        }
+
+        private static HttpClient client;
+
+        public static void Init()
         {
             var httpClientHandler = new HttpClientHandler();
             httpClientHandler.ServerCertificateCustomValidationCallback =
                 (msg, cert, chain, err) => { return true; };
             client = new HttpClient(httpClientHandler);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+        
+            
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             //client.DefaultRequestHeaders.Accept.Add(new Me)
-        } 
+        
 
-        public async Task<bool> LoginAsync(string name, string pswd)
+        public static async void UpdateRemote()
         {
+            List<SQL_ModelPrediction> predictions = await DatabaseService.GetAllAsync();
+
+            predictions.ForEach(prediction =>
+            {
+                var json = JsonConvert.SerializeObject(prediction);
+
+                var content = new StringContent(json);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                client.PostAsync(rootUrl + "/api/UsersPhotos", content);
+            });
+        }
+
+        private static async void ConvertRemoteDBItemToSQLItem()
+        {
+            var response = client.GetAsync(rootUrl + "/api/UsersPhotos");
+            string serial = await response.Result.Content.ReadAsStringAsync();
+            
+        }
+        public static async Task<bool> LoginAsync(string name, string pswd)
+        {
+            Debug.WriteLine(rootUrl);
             var keyVals = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("username", name),
@@ -37,8 +72,11 @@ namespace MelanomaClassification.Services
                 new KeyValuePair<string, string>("grant_type", "password")
             };
 
+
             var request = new HttpRequestMessage(HttpMethod.Post,
-                androidRootUrl + "/Token");
+                rootUrl + "/Token");
+            Console.WriteLine(client.DefaultRequestHeaders.ToString());
+          
             request.Content = new FormUrlEncodedContent(keyVals);
             //take request
             HttpResponseMessage response = await client.SendAsync(request);
@@ -46,7 +84,18 @@ namespace MelanomaClassification.Services
             return response.IsSuccessStatusCode;
 
         }
-        public async Task<bool> RegisterAsync(string username, string pswd, string confmPswd)
+
+        internal async Task<bool> UpdateRemoteAsync(List<ModelPredictionWrapper> saveItems)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async void LogOff()
+        {
+            var response = client.PostAsync(rootUrl + "/api/Account/Logout", null);
+
+        }
+        public static async Task<bool> RegisterAsync(string username, string pswd, string confmPswd)
         {
             var newAccount = new Models.RegisterBindingModel
             {
@@ -61,9 +110,9 @@ namespace MelanomaClassification.Services
             try
             {
 
-                var response = await client.PostAsync("http://10.0.2.2:60268/api/Account/Register", content);
+                var response = await client.PostAsync(rootUrl + "/api/Account/Register", content);
                 Console.WriteLine(response.ToString());
-
+                await App.Current.MainPage.DisplayAlert("Title", response.Content.ReadAsStringAsync().ToString(), "OK");
                 Console.WriteLine(response.ReasonPhrase);
                 Console.WriteLine(response);
                 return response.IsSuccessStatusCode;

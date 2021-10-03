@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using MelanomaClassification.Models;
 using System.Collections.Generic;
 using MelanomaClassification.Services;
+using System.Diagnostics;
 
 namespace MelanomaClassification.Views
 {
@@ -19,6 +20,7 @@ namespace MelanomaClassification.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewCamera : ContentPage, PresenterCamera.IViewCamera
     {
+        private static bool appeared = false;
         private PresenterCamera pCamera;
         private ClassifierServiceFactory factory = new ClassifierServiceFactory();
         public ViewCamera()
@@ -36,10 +38,15 @@ namespace MelanomaClassification.Views
             throw new NotImplementedException();
         }
 
-        protected async override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-
+            if (appeared)
+            {
+                Debug.WriteLine("Error");
+                return;
+            }
+            else appeared = false;
             _ = await CrossMedia.Current.Initialize();
 
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
@@ -54,11 +61,11 @@ namespace MelanomaClassification.Views
 
             MediaFile photoFile = await CrossMedia.Current.TakePhotoAsync(storeCamerMediaOptions);
             var predict = await factory.GetClassifierService().MakePredictions(photoFile.GetStream());
-            var data = new ImageUtilityService().CreatePredictionWrapper(photoFile.GetStream(), predict);
+            var data = ImageUtilityService.CreatePredictionWrapper(photoFile.GetStream(), predict);
             
-            pCamera.DisplayPrediction(predict);
+            Task<bool> task = pCamera.DisplayPrediction(predict);
             ModelPhotoGallery.NewPredictions.Add(data);
-            
+            await Task.WhenAll(task);
 
 
         }
