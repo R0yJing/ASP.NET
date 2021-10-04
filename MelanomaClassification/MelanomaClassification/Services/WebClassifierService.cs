@@ -36,7 +36,7 @@ namespace MelanomaClassification.Services
             var responseStr = await response.Content.ReadAsStringAsync();
             var predictionsWrapper = JsonConvert.DeserializeObject<ModelResponse>(responseStr);
             var preds = predictionsWrapper.Predictions;
-            return preds[preds.Count - 1];
+            return preds[0];
 
         }
         public async Task<ModelPrediction> MakePredictions(Stream photoStream)
@@ -47,12 +47,12 @@ namespace MelanomaClassification.Services
             var response = await client.PostAsync(endpointUrl, content);
             var responseStr = await response.Content.ReadAsStringAsync();
             
-            var predictions = JsonConvert.DeserializeObject<ModelResponse>(responseStr);
+            ModelResponse resp = JsonConvert.DeserializeObject<ModelResponse>(responseStr);
             Debug.WriteLine("hello");
             //return the most likely result which is at index 0
-            ModelPrediction pred = predictions.Predictions[0];
-            Debug.WriteLine(pred.Tag);
-            Debug.WriteLine(pred.Tag);
+            ModelPrediction pred = resp.Predictions[0];
+            Debug.WriteLine(pred.TagName);
+            Debug.WriteLine(pred.TagName);
             Debug.WriteLine(pred.Probability);
             //pred.Tag = Tag.GetTag(int.Parse(pred.TagId));
             return pred;

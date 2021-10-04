@@ -33,7 +33,7 @@ namespace MelanomaClassification.Presenters
             
             try
             {
-                await Shell.Current.GoToAsync($"{nameof(ViewResultPage)}?resultId={predict.Tag}");
+                await Shell.Current.GoToAsync($"{nameof(ViewResultPage)}?resultId={predict.TagName}");
             }
             catch (Exception e)
             {

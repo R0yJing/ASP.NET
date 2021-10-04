@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -12,15 +13,38 @@ using Web_API.Models;
 
 namespace Web_API.Controllers
 {
+    [Authorize]
     public class ImageDataController : ApiController
     {
         private ImageDataContext db = new ImageDataContext();
 
         // GET: api/ImageData
+        //get for current user
         public IQueryable<ImageDataModel> GetImageDataModels()
         {
-            return db.ImageDataModels;
+            string username = User.Identity.Name;
+            return db.ImageDataModels.Where(item => item.Username == username);
         }
+
+        [ResponseType(typeof(int))]
+        [Route("api/ImageData/CurrentUser")]
+        public IHttpActionResult GetNumItemsCurrentUser()
+        {
+            Debug.WriteLine("Current user");
+            string currentUser = User.Identity.Name;
+
+            return Ok(db.ImageDataModels.Count(item => item.Username == currentUser));
+
+        }
+
+        /*[ResponseType(typeof(int))]
+        [HttpGet]
+        public IHttpActionResult GetNumberOfItems_CurrentUser(string name)
+        {
+            if (name != User.Identity.Name) return BadRequest("Invalid operation...");
+
+            return Ok(db.ImageDataModels.Count(item => item.Username == User.Identity.Name));
+        }*/
 
         // GET: api/ImageData/5
         [ResponseType(typeof(ImageDataModel))]
@@ -34,6 +58,7 @@ namespace Web_API.Controllers
 
             return Ok(imageDataModel);
         }
+
 
         // PUT: api/ImageData/5
         [ResponseType(typeof(void))]
@@ -74,6 +99,7 @@ namespace Web_API.Controllers
         [ResponseType(typeof(ImageDataModel))]
         public IHttpActionResult PostImageDataModel(ImageDataModel imageDataModel)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

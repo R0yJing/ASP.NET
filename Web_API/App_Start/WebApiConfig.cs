@@ -24,7 +24,16 @@ namespace Web_API
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
+                );
+            config.Routes.MapHttpRoute(
+                name: "CurrentUserNumItems",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { action=RouteParameter.Optional, id=RouteParameter.Optional}
+
+                );
+
+
+
         }
     }
 }

@@ -56,7 +56,7 @@ namespace MelanomaClassification.Views
                 {
 
                     ModelPrediction predict = await factory.GetClassifierService().MakePredictions(new MemoryStream((byte[])chosenImageData));
-                    await Shell.Current.GoToAsync($"{nameof(ViewResultPage)}?resultId={predict.Tag}");
+                    await Shell.Current.GoToAsync($"{nameof(ViewResultPage)}?resultId={predict.TagName}");
                 });
             }
         }

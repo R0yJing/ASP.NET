@@ -40,7 +40,7 @@ namespace MelanomaClassification.Droid
             var index = Array.IndexOf(outputs, outputs.Max());
             ModelPrediction newPrediction = new ModelPrediction
             {
-                Tag = Tag.GetTag(index),
+                TagName = Tag.GetTag(index),
             };
             return newPrediction;
 

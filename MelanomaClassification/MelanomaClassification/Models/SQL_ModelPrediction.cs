@@ -7,11 +7,11 @@ namespace MelanomaClassification.Models
     [Table("predictionTbl")]
     public class SQL_ModelPrediction
     {
-        [PrimaryKey]
+        [NotNull]
         public string Username { get; set; }
         [NotNull]
         public byte[] ImageData { get; set; }
-        
+        [PrimaryKey] [AutoIncrement]
         public int Id { get; set; }
 
         public string Tag { get; set; }

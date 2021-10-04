@@ -11,7 +11,7 @@ namespace Web_API.Models
         public string Username { get; set; }
         //[Required]
         public byte[] ImageData { get; set; }
-
+        [Required]
         public int Id { get; set; }
        
         public string Tag { get; set; }

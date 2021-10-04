@@ -16,7 +16,7 @@ namespace MelanomaClassification.Services
             get 
             { if (!UnitTestDetector.xunitActive)
                     return "http://192.168.1.8:45455";
-                else return "http://localhost:44332";
+                else return "https://localhost:44332";
             }
             set { }
         }
@@ -38,10 +38,11 @@ namespace MelanomaClassification.Services
                 client = new HttpClient(httpClientHandler);
             }
         }
+   
 
         public static async Task<int> GetNumberItems()
         {
-            var response = client.GetAsync(rootUrl + "/api/UserPhotos/NumOfItemsCurrentUser");
+            var response = client.GetAsync(rootUrl + "/api/ImageData/CurrentUser");
             try
             { 
                 var str = JsonConvert.DeserializeObject(await response.Result.Content.ReadAsStringAsync()) as string;
@@ -70,7 +71,7 @@ namespace MelanomaClassification.Services
                 var content = new StringContent(json);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                await client.PostAsync(rootUrl + "/api/UsersPhotos", content);
+                await client.PostAsync(rootUrl + "/api/ImageData", content);
             }
           
         }
@@ -81,10 +82,12 @@ namespace MelanomaClassification.Services
             
             var userData = JsonConvert.DeserializeObject<List<SQL_ModelPrediction>>(await response.Content.ReadAsStringAsync());
             //await DatabaseService.PutAll(userData);
-            userData.ForEach(data => DatabaseService.PutAll(userData));
-
+            userData.ForEach(data => DatabaseService.PutAllAsync(userData));
+            
 
         }
+
+
         public static async Task<bool> LoginAsync(string name, string pswd)
         {
             Debug.WriteLine(rootUrl);
@@ -99,24 +102,29 @@ namespace MelanomaClassification.Services
             var request = new HttpRequestMessage(HttpMethod.Post,
                 rootUrl + "/Token");
             Console.WriteLine(client.DefaultRequestHeaders.ToString());
-          
             request.Content = new FormUrlEncodedContent(keyVals);
             //take request
             HttpResponseMessage response = await client.SendAsync(request);
+            LoginResponse resp = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as LoginResponse;
+
             Debug.WriteLine(await response.Content.ReadAsStringAsync());
             return response.IsSuccessStatusCode;
 
         }
 
-        internal async Task<bool> UpdateRemoteAsync(List<ModelPredictionWrapper> saveItems)
+        private class LoginResponse
         {
-            throw new NotImplementedException();
+            string Token { get; set; }
         }
 
-        public async void LogOff()
+        public static async Task<bool> LogOffAsync()
         {
-            var response = client.PostAsync(rootUrl + "/api/Account/Logout", null);
-
+            HttpResponseMessage response = await client.PostAsync(rootUrl + "/api/Account/Logout", null);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
         public static async Task<bool> RegisterAsync(string username, string pswd, string confmPswd)
         {
@@ -147,5 +155,14 @@ namespace MelanomaClassification.Services
                 throw e;
             }
         }
+
+        private static class LogoffSettings
+        {
+            public static string AccessToken { get; set; }
+            public static string Username { get; set; }
+            public static string Password { get; set; }
+        }
     }
+
+    
 }
