@@ -14,6 +14,7 @@ namespace MelanomaClassification.Services
     {
         private static SQLiteAsyncConnection DbConn;
         private static string ConnString = Path.Combine(FileSystem.AppDataDirectory, "localDb.db");
+        private static string TableName = "predictionTbl";
         public static void Init()
         {
             if (DbConn == null)
@@ -50,10 +51,9 @@ namespace MelanomaClassification.Services
             await DbConn.InsertAsync(newInsertion);
 
         }
-        public static async Task<bool> PutAll(List<SQL_ModelPrediction> predictions)
-        {
-            return await DbConn.InsertAllAsync(predictions) == 1;
-        }
+
+        public static void PutAll(List<SQL_ModelPrediction> rawData) => DbConn.InsertAllAsync(rawData);
+
         public static void PutAll(List<ModelPredictionWrapper> predictions)
         {
             predictions.ForEach(prediction => PutAsync(prediction));
@@ -79,6 +79,11 @@ namespace MelanomaClassification.Services
            
 
             return predictions;
+        }
+
+        public static async Task<int> GetNumberItemsCurrentUser()
+        {
+            return (await DbConn.QueryScalarsAsync<int>("SELECT COUNT(*) FROM ?", new string[] { TableName }))[0];
         }
     }
 }

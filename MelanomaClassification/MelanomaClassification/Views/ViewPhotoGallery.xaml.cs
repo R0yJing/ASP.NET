@@ -23,6 +23,7 @@ namespace MelanomaClassification.Views
         private ObservableCollection<ModelPredictionWrapper> imageHistory = new ObservableCollection<ModelPredictionWrapper>();
         private ClassifierServiceFactory factory;
         public static ViewPhotoGallery self;
+       
         public ICommand Delete
         {
             get { return new Command<ModelPredictionWrapper>(Remove); }
@@ -36,8 +37,12 @@ namespace MelanomaClassification.Views
 
         }
 
-        public Button btn = new Button();
-
+        public ICommand send
+        {
+            get { return new Command(() => UserService.UpdateRemote()); }
+            set { }
+        }
+    
         public IEnumerable<ModelPredictionWrapper> GetAllData()
         {
             return imageHistory;
@@ -72,6 +77,8 @@ namespace MelanomaClassification.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            UserService.UpdateRemote();
+
             pPhotoGallery.AddNewPredictionsIfAny();
         }
 

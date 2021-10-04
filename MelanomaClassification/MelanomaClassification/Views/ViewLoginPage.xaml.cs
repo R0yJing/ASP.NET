@@ -15,7 +15,8 @@ namespace MelanomaClassification.Views
     public partial class ViewLoginPage : ContentPage
     {
         private PresenterLoginPage pLoginPage;
-     
+        
+   
         public ICommand OnTapLogin
         {
             get
@@ -24,10 +25,10 @@ namespace MelanomaClassification.Views
                 {
                     Console.WriteLine("logging in");
                     LoggingInIndicator.IsVisible = true;
-                    bool loggedIn = await UserService.LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+                    //bool loggedIn = await UserService.LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
 
                     LoggingInIndicator.IsVisible = false;
-                    if (loggedIn)
+                    if (true)
                     {
                         Shell.Current.FindByName<ShellContent>("OnLogin").IsVisible = false;
                         if (Shell.Current.FindByName<TabBar>("AfterLogin") == null)

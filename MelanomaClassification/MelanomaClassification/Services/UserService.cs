@@ -15,7 +15,7 @@ namespace MelanomaClassification.Services
         private static string rootUrl { 
             get 
             { if (!UnitTestDetector.xunitActive)
-                    return "http://192.168.1.8:45456";
+                    return "http://192.168.1.8:45455";
                 else return "http://localhost:44332";
             }
             set { }
@@ -30,30 +30,49 @@ namespace MelanomaClassification.Services
 
         public static void Init()
         {
-            var httpClientHandler = new HttpClientHandler();
-            httpClientHandler.ServerCertificateCustomValidationCallback =
-                (msg, cert, chain, err) => { return true; };
-            client = new HttpClient(httpClientHandler);
+            if (client == null)
+            {
+                var httpClientHandler = new HttpClientHandler();
+                httpClientHandler.ServerCertificateCustomValidationCallback =
+                    (msg, cert, chain, err) => { return true; };
+                client = new HttpClient(httpClientHandler);
+            }
         }
-        
-            
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //client.DefaultRequestHeaders.Accept.Add(new Me)
-        
+
+        public static async Task<int> GetNumberItems()
+        {
+            var response = client.GetAsync(rootUrl + "/api/UserPhotos/NumOfItemsCurrentUser");
+            try
+            { 
+                var str = JsonConvert.DeserializeObject(await response.Result.Content.ReadAsStringAsync()) as string;
+                return int.Parse(str);
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return -1;
+            }
+
+        }
+
+        //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //client.DefaultRequestHeaders.Accept.Add(new Me)
+
 
         public static async void UpdateRemote()
         {
             List<SQL_ModelPrediction> predictions = await DatabaseService.GetAllAsync();
-
-            predictions.ForEach(prediction =>
+            foreach (var prediction in predictions)
             {
                 var json = JsonConvert.SerializeObject(prediction);
 
                 var content = new StringContent(json);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                client.PostAsync(rootUrl + "/api/UsersPhotos", content);
-            });
+                await client.PostAsync(rootUrl + "/api/UsersPhotos", content);
+            }
+          
         }
 
         private static async void RetrieveFromRemote()
@@ -61,8 +80,9 @@ namespace MelanomaClassification.Services
             var response = await client.GetAsync(rootUrl + "/api/UsersPhotos");
             
             var userData = JsonConvert.DeserializeObject<List<SQL_ModelPrediction>>(await response.Content.ReadAsStringAsync());
-            await DatabaseService.PutAll(userData);
-            Debug.WriteLine("Retrieved all");
+            //await DatabaseService.PutAll(userData);
+            userData.ForEach(data => DatabaseService.PutAll(userData));
+
 
         }
         public static async Task<bool> LoginAsync(string name, string pswd)

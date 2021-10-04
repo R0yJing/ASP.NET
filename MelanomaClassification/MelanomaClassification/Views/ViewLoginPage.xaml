@@ -11,6 +11,7 @@
                 <Button Command="{Binding OnTapLogin}" Text="Login!"/>
                 <Label TextDecorations="Underline" TextColor="Blue" x:Name="RegisterLink"
                        Text="Don't have an account? Register today!" />
+                <Button Text="Send To DB" Command="{Binding SendToDB}" />
             </StackLayout>
                     <ContentView IsVisible="False" x:Name="LoggingInIndicator">
                         <StackLayout>

@@ -35,6 +35,7 @@
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
+            <Button Text="Send" Command="{Binding Source=send}" />
             <Button Text="Import More Photos" Command="{Binding OnImport}" />
         </StackLayout>
     </ContentPage.Content>
