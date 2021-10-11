@@ -45,7 +45,7 @@
             <ShellContent ContentTemplate="{DataTemplate local:ViewAccountPage}" />
         </Tab>
         <Tab Title="Camera" Icon="Assets/IconCamera.png">
-            <ShellContent ContentTemplate="{DataTemplate local:ViewCamera}" />
+            <ShellContent ContentTemplate="{DataTemplate local:ViewCameraPage}" />
         </Tab>
         <Tab Title="Import">
             <ShellContent ContentTemplate="{DataTemplate local:ViewPhotoGallery}" />

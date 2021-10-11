@@ -25,7 +25,7 @@ namespace MelanomaClassification.Services
             client.DefaultRequestHeaders.Add("Prediction-Key", predictionKey);
         }
         
-        public async Task<ModelPrediction> MakePredictions(string Url)
+        public async Task<List<ModelPrediction>> MakePredictions(string Url)
         {
             var UrlObject = new JsonUrl { Url = Url };
             var json = JsonConvert.SerializeObject(UrlObject);
@@ -36,10 +36,10 @@ namespace MelanomaClassification.Services
             var responseStr = await response.Content.ReadAsStringAsync();
             var predictionsWrapper = JsonConvert.DeserializeObject<ModelResponse>(responseStr);
             var preds = predictionsWrapper.Predictions;
-            return preds[0];
+            return new List<ModelPrediction>(preds);
 
         }
-        public async Task<ModelPrediction> MakePredictions(Stream photoStream)
+        public async Task<List<ModelPrediction>> MakePredictions(Stream photoStream)
         {
             var content = new ByteArrayContent(ImageUtilityService.GetByteArrFromImageStream(photoStream));
 
@@ -48,16 +48,14 @@ namespace MelanomaClassification.Services
             var responseStr = await response.Content.ReadAsStringAsync();
             
             ModelResponse resp = JsonConvert.DeserializeObject<ModelResponse>(responseStr);
-            Debug.WriteLine("hello");
             //return the most likely result which is at index 0
-            ModelPrediction pred = resp.Predictions[0];
-            Debug.WriteLine(pred.TagName);
-            Debug.WriteLine(pred.TagName);
-            Debug.WriteLine(pred.Probability);
-            //pred.Tag = Tag.GetTag(int.Parse(pred.TagId));
-            return pred;
 
+            //pred.Tag = Tag.GetTag(int.Parse(pred.TagId));
+
+            return (List<ModelPrediction>)resp.Predictions;
         }
+
+       
 
         private class JsonUrl
         {

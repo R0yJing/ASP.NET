@@ -6,6 +6,8 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout x:Name="mainScreen">
+                <Button Text="Remote Test"  Command="{Binding TestRemote}" />
+                <Button Text="Local Test"  Command="{Binding TestLocal}" />
                 <Entry x:Name="UsernameEntry" Placeholder="Enter email"/>
                 <Entry x:Name="PasswordEntry" Placeholder="Enter password" />
                 <Button Command="{Binding OnTapLogin}" Text="Login!"/>
@@ -13,6 +15,7 @@
                        Text="Don't have an account? Register today!" />
                 <Button Text="Send To DB" Command="{Binding SendToDB}" />
             </StackLayout>
+            
                     <ContentView IsVisible="False" x:Name="LoggingInIndicator">
                         <StackLayout>
                             <ActivityIndicator IsRunning="True"/>
@@ -21,6 +24,7 @@
                                    VerticalTextAlignment="Center"/>
                         </StackLayout>
                     </ContentView>
+           
         </Grid>
     </ContentPage.Content>
 </ContentPage>

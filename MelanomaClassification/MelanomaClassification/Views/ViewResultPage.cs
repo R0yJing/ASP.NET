@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MelanomaClassification.Models;
 using MelanomaClassification.Presenters;
 using Xamarin.Forms;
 
 namespace MelanomaClassification.Views
 {
-    [QueryProperty(nameof(Result), "resultId")]
+    [QueryProperty(nameof(Result), "result")]
     public class ViewResultPage : ContentPage
     {
         private const string initVal = "undefined";
@@ -42,14 +43,23 @@ namespace MelanomaClassification.Views
             //go back to the camera page
             var thisPage= await Navigation.PopAsync();
             if (nameof(thisPage) == nameof(ViewPhotoGallery)) {
-               await Shell.Current.GoToAsync(nameof(ViewCamera));
+               await Shell.Current.GoToAsync(nameof(ViewCameraPage));
 
             }
         }
 
         public string Result
         {
-            set => pResultPage.LoadResult(value);
+            
+            set
+            {
+
+                string[] result = value.Split(':');
+                var tags = result[0].Split('/');
+                var probs = result[1].Split('/');
+                
+                pResultPage.LoadResult(tags, probs);
+            }
         }
 
         public void SetVisAid(Image p)

@@ -5,6 +5,7 @@ using MelanomaClassification.Views;
 using MelanomaClassification.Models;
 using System.IO;
 using System.Diagnostics;
+using Xamarin.Forms;
 
 namespace MelanomaClassification.Presenters
 {
@@ -21,31 +22,43 @@ namespace MelanomaClassification.Presenters
             this.vResultPage = viewResultPage;
         }
 
-        public void LoadResult(string prediction)
+        public void LoadResult(string [] tags, string[] prob)
         {
             Debug.WriteLine("getting files");
-
-            foreach(var path in Directory.GetFiles(".."))
+           
+            string resultText = "";
+            for(int i =0; i < 3; i++)
             {
-                Debug.WriteLine(path);
-
+                resultText += "Probability of " + tags[i] + " : " + (double.Parse(prob[i]) * 100) +"%";
             }
-            Debug.WriteLine("Previous dir");
-            foreach (var path in Directory.GetFiles("../Assets"))
+            if (double.Parse(prob[0]) >= 0.5)
             {
-                Debug.WriteLine(path);
+                resultText += "This image is most likely " + tags[0];
+            }
+            else resultText += "Sorry, we can not classify this image";
 
-            }
-            if (prediction == "Malignant")
+            vResultPage.SetResultText(resultText);
+            var visAid = new Image();
+            try
             {
-                vResultPage.SetVisAid(mResultPage.GetImage(mResultPage.warningIcon));
+                if (double.Parse(prob[0]) < 0.5 || tags[0].ToLower().Contains("unknown"))
+                {
+                    visAid.Source = ImageSource.FromFile("../Assets/questionMark.jpg");
+                    vResultPage.SetVisAid(visAid);
+                }
+                else if (tags[0].ToLower().Contains("benign"))
+                {
+                    visAid.Source = ImageSource.FromFile("../Assets/congratsIcon.png");
+                    vResultPage.SetVisAid(visAid);
+                } else if (tags[0].ToLower().Contains("malign")){
+                    visAid.Source = ImageSource.FromFile("../Assets/warningIcon.png");
+                    vResultPage.SetVisAid(visAid);
+                }
             }
-            else
+            catch (Exception)
             {
-                vResultPage.SetVisAid(mResultPage.GetImage(mResultPage.congratsIcon));
+                Console.WriteLine("Couldn't load image");
             }
-            vResultPage.SetResultText(mResultPage.GetText(prediction));
-
         }
     }
 }

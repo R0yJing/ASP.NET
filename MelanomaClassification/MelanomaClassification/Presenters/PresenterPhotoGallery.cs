@@ -11,6 +11,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 using MelanomaClassification.Services;
+using System.Diagnostics;
 
 namespace MelanomaClassification.Presenters
 {
@@ -36,31 +37,56 @@ namespace MelanomaClassification.Presenters
         }
 
 
-        public async void ImportImage()
+        public bool ImportImage()
         {
+            
             try
             {
-                var predict = await mPhotoGallery.ImportPhotoAsync();
-                foreach (var wrapper in vPhotoGallery.GetAllData())
+                
+                //Console.WriteLine("stream returned");
+                //return ImageUtilityService.CreatePredictionWrapper(stream);
+
+                /*foreach (var wrapper in vPhotoGallery.GetAllData())
                 {
                     if (Enumerable.SequenceEqual(wrapper.ImageData, predict.ImageData))
                     {
                         await App.Current.MainPage.DisplayAlert("Duplicate image", "This image is already imported!", "OK");
                         return;
                     }
-                }
-                vPhotoGallery.AddPrediction(predict);
-                DatabaseService.PutAsync(predict);
+                }*/
+
 
             } catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine("Cannot import " + e.ToString());
+            }
+            vPhotoGallery.ImportHasFinished = true;
+            return true;
+        }
+        public void HandlePhotoReceived(List<string> imagePaths)
+        {
+            var wrappers = new List<ModelPredictionWrapper>();
+            //If we have selected images, put them into the carousel view.
+            if (imagePaths.Count > 0)
+            {
+                Console.WriteLine(imagePaths.ToString());
+                foreach (var path in imagePaths)
+                {
+                    Debug.WriteLine("Processing photo...");
+                    wrappers.Add(new ModelPredictionWrapper
+                    {
+                        Date = DateTime.Now.ToString("mm:HH dd/MM/yyyy"),
+                        ASource = ImageSource.FromFile(path)
+                    });
+                }
+
+                wrappers.ForEach(wrapper => vPhotoGallery.AddPrediction(wrapper));
 
             }
-        }
 
+        }
         public void AddNewPredictionsIfAny() => 
             mPhotoGallery.GetAndRemoveNewPredictions().ForEach(Element => vPhotoGallery.AddPrediction(Element));
-
+         
     }
 }

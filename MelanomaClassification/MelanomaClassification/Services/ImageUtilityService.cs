@@ -10,34 +10,84 @@ namespace MelanomaClassification.Services
     {
         public static byte[] GetByteArrFromImageStream(Stream sIn)
         {
-            //16384 = 16 x 1024
-            /*var buff = new byte[16384];
-            using (MemoryStream ms = new MemoryStream())
-            {
-               
-                int read;
-                while ((read = sIn.Read(buff, 0, buff.Length)) > 0)
-                {
-                    ms.Write(buff, 0, read);
-                }
-                return ms.ToArray();
-            }*/
             BinaryReader bReader = new BinaryReader(sIn);
             return bReader.ReadBytes((int)sIn.Length);
             
         }
-
-        public static ModelPredictionWrapper CreatePredictionWrapper(Stream stream, ModelPrediction predict = null)
+        private static double ParsePercentage(string perc) => double.Parse(perc.Trim().Replace("%", ""));
+        private static ModelPrediction ConvToModelPrediction(SQL_ModelPrediction sqlObj)
         {
-            byte[] imageRawData = GetByteArrFromImageStream(stream);
+            return new ModelPrediction
+            {
+                TagName = sqlObj.Tag,
+                Probability = ParsePercentage(sqlObj.Prob)
+
+            };
+        }
+        private static List<ModelPrediction> ConvToModelPrediction(List<SQL_ModelPrediction> sqlObj)
+        {
+            var list = new List<ModelPrediction>();
+            sqlObj.ForEach(item => list.Add(ConvToModelPrediction(item)));
+            return list;
+        }
+
+        public static ModelPredictionWrapper CreatePredictionWrapper(byte[] imageRawData, List<ModelPrediction> predictions =null)
+        {
 
             var data = new ModelPredictionWrapper
             {
                 ImageData = imageRawData,
-                Date = DateTime.Now.ToString("dd/MM/yyyy"),
-                Prediction = predict
+                //Date = DateTime.Now.ToString("dd/MM/yyyy"),
+                Predictions =predictions
             };
             return data;
         }
+
+        public static ModelPredictionWrapper CreatePredictionWrapper(Stream stream, List<ModelPrediction> predictions = null)
+        {
+            byte[] imageRawData = GetByteArrFromImageStream(stream);
+            if (predictions == null)
+            {
+                return CreatePredictionWrapper(imageRawData);
+            }
+            else return CreatePredictionWrapper(imageRawData, predictions);
+        }
+        public static List<ModelPredictionWrapper> CreatePredictionWrapper(List<SQL_ModelImage> images, List<SQL_ModelPrediction> predictions)
+        {
+            
+           
+            var predsMap = new Dictionary<string, List<SQL_ModelPrediction>>();
+
+            var wrappers = new List<ModelPredictionWrapper>();
+            predictions.ForEach(item =>
+            {
+                var listPredicts = new List<SQL_ModelPrediction>();
+                predsMap.TryGetValue(item.ParentId, out listPredicts);
+                if (listPredicts == null || listPredicts.Count == 0)
+                {
+                    listPredicts = new List<SQL_ModelPrediction>();
+                    predsMap.Add(item.ParentId, listPredicts);
+                }
+                listPredicts.Add(item);
+
+            });
+            images.ForEach(image =>
+            {
+                var listPredicts = new List<SQL_ModelPrediction>();
+                predsMap.TryGetValue(image.ParentId, out listPredicts);
+                if (listPredicts == null) throw new Exception("associated preds are none!");
+                var wrapper = new ModelPredictionWrapper
+                {
+                    Predictions = ConvToModelPrediction(listPredicts),
+                    ImageData = image.ImageData,
+                    ParentId = image.ParentId,
+
+                };
+                wrappers.Add(wrapper);
+            });
+            return wrappers;
+        }
+
+
     }
 }

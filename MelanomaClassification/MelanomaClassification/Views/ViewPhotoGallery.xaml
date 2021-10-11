@@ -2,40 +2,58 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MelanomaClassification.Views.ViewPhotoGallery"
-             x:Name="ThisPage">
-             
+             x:Name="ThisPage"
+             >
+  
     <ContentPage.Content>
         
         <StackLayout>
-           
+            
             <Label Text="Classification History" FontSize="25" HorizontalTextAlignment="Center" FontAttributes="Bold" />
-            <CarouselView x:Name="ImageHistory" ItemsSource="{Binding Source=imageHistory}" Loop="False">
+            <CarouselView x:Name="ImageHistory" Loop="False">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         
                         <Frame HasShadow="True" BorderColor="DarkGray" HeightRequest="300">
-                            <StackLayout>
-                                
-                                <Image Source="{Binding Source}" Aspect="AspectFit" />
-                                <Label Text="{Binding Tag}" />
-                                <Label Text="{Binding Prob}" />
-                                <Label Text="{Binding Date}" />
-                                <Button x:Name="ClassifyButton" Text="Classify again"
-                                        Command="{Binding Source={x:Reference Name=ThisPage},
-                                        Path=BindingContext.Classify}" CommandParameter="{Binding ImageData}" />
-                              
-                                <Button x:Name="DeleteButton" Text="Delete this" 
-                                        Command="{Binding Source={x:Reference Name=ThisPage},
-                                        Path=BindingContext.Delete}" CommandParameter="{Binding .}" />
+                           
+                            <Grid >
+                               
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"  />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" HorizontalOptions="Center" Source="{Binding ASource}" />
+                                <StackLayout Grid.Column="1">
+                                    <Label x:Name="Placeholder0" Padding="15"/>
+                                    <Grid>
+                                      
+                                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding TagNameBestProb}" />
+                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding ProbBestProb}" />
 
-                            </StackLayout>
+                                        <Label Grid.Row="2" Grid.Column="0" Text="{Binding TagNameMidProb}" />
+                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding ProbMidProb}" />
+
+                                        <Label Grid.Row="3" Grid.Column="0" Text="{Binding TagNameLowestProb}" />
+                                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding ProbLowestProb}" />
+                                    </Grid>
+                                    <Label x:Name="Placeholder1" Padding="24"/>
+                                    <StackLayout>
+                                        <Button Grid.Row="4" x:Name="ClassifyButton" Text="Classify again"
+                                            Command="{Binding Source={x:Reference Name=ThisPage},
+                                            Path=BindingContext.Classify}" CommandParameter="{Binding .}" />
+
+                                        <Button Grid.Row="5" x:Name="DeleteButton" Text="Delete this" 
+                                            Command="{Binding Source={x:Reference Name=ThisPage},
+                                            Path=BindingContext.Delete}" CommandParameter="{Binding .}" />
+                                    </StackLayout>
+                                    </StackLayout>
+                            </Grid>
                                 
                            
                         </Frame>
                     </DataTemplate>
                 </CarouselView.ItemTemplate>
             </CarouselView>
-            <Button Text="Import More Photos" Command="{Binding OnImport}" />
+            <Button x:Name="ImportButton" Text="Import More Photos" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -4,6 +4,7 @@ using MelanomaClassification.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace MelanomaClassification.Presenters
 {
@@ -41,6 +42,8 @@ namespace MelanomaClassification.Presenters
             bool reallyLoggingOut = await App.Current.MainPage.DisplayAlert("Confirmation needed", "Really logging out?", "Ok", "Cancel");
             if (reallyLoggingOut)
             {
+
+                await UserService.LogOffAsync();
                 vAccountPage.LogoutApp();
             }
         }
@@ -50,11 +53,22 @@ namespace MelanomaClassification.Presenters
             bool reallyDeletingAcct = await App.Current.MainPage.DisplayAlert("Confirmation needed", "Really logging out?", "Ok", "Cancel");
             if (reallyDeletingAcct)
             {
-                vAccountPage.LogoutApp();
+               
+                bool deleted = await UserService.DeleteUserAsync();
 
+                if (deleted)
+                {
+
+                    await App.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ViewUserFeedback()));
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Something bad happened: cannot logout", "Ok", "");
+                }       
             }
         }
 
+        
         public interface IViewAccountPage
         {
 

@@ -15,18 +15,7 @@ namespace MelanomaClassification
             InitializeComponent();
 
             MainPage = new AppShell();
-            DatabaseService.Init();
-            UserService.Init();
-        }
-
-        protected override void OnSleep()
-        {
-            base.OnSleep();
-            Debug.WriteLine("Closing app");
             
-            UserService.UpdateRemote();
-
         }
-
     }
 }

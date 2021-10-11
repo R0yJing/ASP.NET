@@ -15,11 +15,13 @@ namespace MelanomaClassification.Services
         private static string rootUrl { 
             get 
             { if (!UnitTestDetector.xunitActive)
-                    return "http://192.168.1.8:45455";
+                    return "http://192.168.1.9:45455";
                 else return "https://localhost:44332";
             }
             set { }
         }
+
+        private string Token = null;
         private static string localHostUrl
         {
             get { return "http://localhost:44332";  }
@@ -57,13 +59,18 @@ namespace MelanomaClassification.Services
 
         }
 
+        internal static Task<bool> DeleteUserAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         //client.DefaultRequestHeaders.Accept.Add(new Me)
 
 
         public static async void UpdateRemote()
         {
-            List<SQL_ModelPrediction> predictions = await DatabaseService.GetAllAsync();
+            List<SQL_ModelPrediction> predictions = await DatabaseService.GetUserPredictionDataAsync();
             foreach (var prediction in predictions)
             {
                 var json = JsonConvert.SerializeObject(prediction);
@@ -97,7 +104,7 @@ namespace MelanomaClassification.Services
                 new KeyValuePair<string, string>("password", pswd),
                 new KeyValuePair<string, string>("grant_type", "password")
             };
-
+            
 
             var request = new HttpRequestMessage(HttpMethod.Post,
                 rootUrl + "/Token");
@@ -105,7 +112,8 @@ namespace MelanomaClassification.Services
             request.Content = new FormUrlEncodedContent(keyVals);
             //take request
             HttpResponseMessage response = await client.SendAsync(request);
-            LoginResponse resp = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as LoginResponse;
+           
+            var resp = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as LoginResponse;
 
             Debug.WriteLine(await response.Content.ReadAsStringAsync());
             return response.IsSuccessStatusCode;
@@ -114,7 +122,12 @@ namespace MelanomaClassification.Services
 
         private class LoginResponse
         {
-            string Token { get; set; }
+            public string Token { get; set; }
+            public string Token_Type { get; set; }
+            public long expiresIn { get; set; }
+            public string UserName { get; set; }
+            public string Issued { get; set; }
+            public string Expires { get; set; }
         }
 
         public static async Task<bool> LogOffAsync()

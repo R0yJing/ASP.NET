@@ -1,6 +1,7 @@
 FormsViewGroup.dll
 Plugin.CurrentActivity.dll
 Plugin.Media.dll
+Plugin.Permissions.dll
 SQLitePCLRaw.lib.e_sqlite3.android.dll
 TensorFlowXamarin.dll
 Xamarin.AndroidX.Activity.dll
@@ -51,6 +52,7 @@ Xamarin.Forms.Platform.Android.dll
 Xamarin.Forms.Platform.dll
 Xamarin.Google.Android.Material.dll
 Xamarin.Google.Guava.ListenableFuture.dll
+Xamarin.TensorFlow.Lite.dll
 androidx.versionedparcelable.versionedparcelable.aar
 androidx.lifecycle.lifecycle-runtime.aar
 androidx.core.core.aar

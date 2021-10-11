@@ -23,6 +23,22 @@
           "lib/monoandroid44/Plugin.CurrentActivity.dll": {}
         }
       },
+      "Plugin.Permissions/6.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.AndroidX.Core": "1.1.0",
+          "Xamarin.Essentials": "1.5.2"
+        },
+        "frameworkAssemblies": [
+          "Java.Interop"
+        ],
+        "compile": {
+          "lib/monoandroid10.0/Plugin.Permissions.dll": {}
+        },
+        "runtime": {
+          "lib/monoandroid10.0/Plugin.Permissions.dll": {}
+        }
+      },
       "sqlite-net-pcl/1.8.116": {
         "type": "package",
         "dependencies": {
@@ -1118,11 +1134,24 @@
           "buildTransitive/monoandroid50/Xamarin.Google.Guava.ListenableFuture.targets": {}
         }
       },
+      "Xamarin.TensorFlow.Lite/2.4.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Java.Interop"
+        ],
+        "compile": {
+          "lib/monoandroid90/Xamarin.TensorFlow.Lite.dll": {}
+        },
+        "runtime": {
+          "lib/monoandroid90/Xamarin.TensorFlow.Lite.dll": {}
+        }
+      },
       "MelanomaClassification/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "Newtonsoft.Json": "13.0.1",
+          "Plugin.Permissions": "6.0.1",
           "Xam.Plugin.Media": "5.0.1",
           "Xamarin.Essentials": "1.6.1",
           "Xamarin.Forms": "5.0.0.2012",
@@ -1176,6 +1205,37 @@
         "lib/monoandroid44/Plugin.CurrentActivity.xml",
         "plugin.currentactivity.2.1.0.4.nupkg.sha512",
         "plugin.currentactivity.nuspec",
+        "readme.txt"
+      ]
+    },
+    "Plugin.Permissions/6.0.1": {
+      "sha512": "na/0FNhyKmSicANWZMLSM0y/FW2AvLoawX3lsvBpELwP15sdJRyuBhRKk1OQjRoNrmTIewcON1tJFyydjMGWcA==",
+      "type": "package",
+      "path": "plugin.permissions/6.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/monoandroid10.0/Plugin.Permissions.dll",
+        "lib/monoandroid10.0/Plugin.Permissions.pdb",
+        "lib/monoandroid80/Plugin.Permissions.dll",
+        "lib/monoandroid80/Plugin.Permissions.pdb",
+        "lib/monoandroid81/Plugin.Permissions.dll",
+        "lib/monoandroid81/Plugin.Permissions.pdb",
+        "lib/monoandroid90/Plugin.Permissions.dll",
+        "lib/monoandroid90/Plugin.Permissions.pdb",
+        "lib/netstandard1.0/Plugin.Permissions.dll",
+        "lib/netstandard1.0/Plugin.Permissions.pdb",
+        "lib/netstandard2.0/Plugin.Permissions.dll",
+        "lib/netstandard2.0/Plugin.Permissions.pdb",
+        "lib/uap10.0.16299/Plugin.Permissions.dll",
+        "lib/uap10.0.16299/Plugin.Permissions.pdb",
+        "lib/uap10.0.16299/Plugin.Permissions.pri",
+        "lib/xamarinios10/Plugin.Permissions.dll",
+        "lib/xamarinios10/Plugin.Permissions.pdb",
+        "lib/xamarintvos10/Plugin.Permissions.dll",
+        "lib/xamarintvos10/Plugin.Permissions.pdb",
+        "plugin.permissions.6.0.1.nupkg.sha512",
+        "plugin.permissions.nuspec",
         "readme.txt"
       ]
     },
@@ -2513,6 +2573,18 @@
         "xamarin.google.guava.listenablefuture.nuspec"
       ]
     },
+    "Xamarin.TensorFlow.Lite/2.4.0": {
+      "sha512": "gBBKIW8Ck1eIqC8hB91hF5iBUxX80qb+jGuuZeeW+4YQgif1W+8eUlgNoBDOyu0oao/nvGCq72/jWw4ONXE1FA==",
+      "type": "package",
+      "path": "xamarin.tensorflow.lite/2.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/monoandroid90/Xamarin.TensorFlow.Lite.dll",
+        "xamarin.tensorflow.lite.2.4.0.nupkg.sha512",
+        "xamarin.tensorflow.lite.nuspec"
+      ]
+    },
     "MelanomaClassification/1.0.0": {
       "type": "project",
       "path": "../MelanomaClassification/MelanomaClassification.csproj",
@@ -2525,7 +2597,8 @@
       "Plugin.CurrentActivity >= 2.1.0.4",
       "Xam.Android.Tensorflow >= 1.0.0",
       "Xamarin.Essentials >= 1.6.1",
-      "Xamarin.Forms >= 5.0.0.2012"
+      "Xamarin.Forms >= 5.0.0.2012",
+      "Xamarin.TensorFlow.Lite >= 2.4.0"
     ]
   },
   "packageFolders": {
@@ -2585,6 +2658,10 @@
           "Xamarin.Forms": {
             "target": "Package",
             "version": "[5.0.0.2012, )"
+          },
+          "Xamarin.TensorFlow.Lite": {
+            "target": "Package",
+            "version": "[2.4.0, )"
           }
         }
       }
