@@ -34,6 +34,7 @@ namespace MelanomaClassification.Views
                     reclassifyBtn
                 }
             };
+
             reclassifyBtn.Command = new Command(Reclassify);
 
         }

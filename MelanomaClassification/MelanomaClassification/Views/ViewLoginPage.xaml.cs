@@ -38,19 +38,24 @@ namespace MelanomaClassification.Views
         }
                 
         public static void filePaths(){
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-            var MyAssemblyName = assembly.GetName().Name; //now this is for the future
-                                                          // MyAssemblyName + ".Music."+filename
-                                                          //anyway now we are building the whole list:
-            var Files = new List<string>(); //todo change to your music class 
-            foreach (var res in assembly.GetManifestResourceNames())
+            string folderPath = @"C:\Users\Roy\Desktop\MobSysDev\MelanomaApp\MelanomaClassification\MelanomaClassification\Assets\Benign\";
+            string folderPath2 = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string[] paths;
+
+            try
             {
-                if (res.Contains(".jpg") || res.Contains(".png"))
-                {
-                    Files.Add(res);
-                }
+                paths = Directory.GetFiles(folderPath, "*.png", SearchOption.AllDirectories);
             }
-            FilePaths = Files; ;
+            catch (Exception)
+            {
+                paths = Directory.GetFiles(folderPath2, "*.png", SearchOption.AllDirectories);
+            }
+            if (paths.Length == 0)
+            {
+                return;
+            }
+            var strings = new List<string>();
+            FilePaths = strings;
         }
         public async static void TestMakePredictions(string mode, int size=50)
         {
@@ -63,7 +68,7 @@ namespace MelanomaClassification.Views
             await TestClassifier(classifier, "benign", (int)size);
             await TestClassifier(classifier, "malignant", (int)size);
             await TestClassifier(classifier, "unknown", (int)size);
-            Debug.WriteLine($"Avaerage time elapsed {totTime / ((int)size) / 3000}, for a sample size of {(int)size * 3} in total "
+            Debug.WriteLine($"Average time elapsed {totTime / ((int)size) / 3000}, for a sample size of {(int)size * 3} in total "
                 + $"\nTotal time elapased in seconds {totTime / 1000}");
             totTime = 0;
 
@@ -139,8 +144,7 @@ namespace MelanomaClassification.Views
                     //folder = @"C:\Users\Roy\Desktop\MobSysDev\MELANOMA\unknown\UNKNOWN\Brisbane ISIC Challenge 2020";
                     break;
             }
-            List<string> imagePath = FilePaths;
-
+            string[] allPhotoPaths = CrossCurrentActivity.Current.Activity.Assets.List("Malign");
 
             List<Stream> streams = new List<Stream>();
             var localClassifier = DependencyService.Get<ILocalClassifierService>();

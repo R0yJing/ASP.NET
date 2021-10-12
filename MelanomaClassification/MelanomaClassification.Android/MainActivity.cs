@@ -1,9 +1,11 @@
-﻿using System;
-
+﻿#define TEST
+//uncomment the above to start unit testing
+using Android.App;
+using Android.OS;
+using System;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
-using Android.OS;
 using Plugin.Media;
 using System.IO;
 using System.Threading.Tasks;
@@ -14,9 +16,22 @@ using Android.Database;
 using Android.Provider;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using Xunit.Sdk;
 
 namespace MelanomaClassification.Droid
 {
+
+    [Activity(Label="TestAPI")]
+    public class TestAPI : Xunit.Runners.UI.RunnerActivity
+    {
+        protected override void OnCreate(Bundle bundle)
+        {
+            AddTestAssembly(System.Reflection.Assembly.GetExecutingAssembly());
+            AddExecutionAssembly(typeof(ExtensibilityPointFactory).Assembly);
+            base.OnCreate(bundle);
+            CrossCurrentActivity.Current.Init(this, bundle);
+        }
+    }
     [Activity(Label = "MelanomaClassification", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -24,7 +39,11 @@ namespace MelanomaClassification.Droid
         protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+#if (DEBUG && TEST)
+            Intent iTestAPI = new Intent(this, typeof(TestAPI));
+            StartActivity(iTestAPI);
+#endif
+#if !TEST
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             await CrossMedia.Current.Initialize();
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
@@ -32,6 +51,8 @@ namespace MelanomaClassification.Droid
 
             LoadApplication(new App());
             Instance = this;
+#endif
+
         }
         public static readonly int PickImageId = 1000;
         public TaskCompletionSource<Stream> PickImageTaskCompletionSource { set; get; }
@@ -151,6 +172,8 @@ namespace MelanomaClassification.Droid
             }
         }*/
     }
+
+
 
 
 }

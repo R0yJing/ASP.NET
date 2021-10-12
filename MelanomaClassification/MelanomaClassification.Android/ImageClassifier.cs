@@ -25,6 +25,8 @@ namespace MelanomaClassification.Droid
 
         public async Task<List<ModelPrediction>> MakePredictions(Stream streamIn)
         {
+
+            BinaryReader bReader = new BinaryReader(streamIn);
             var image = ImageUtilityService.GetByteArrFromImageStream(streamIn);
 
             var mappedByteBuffer = GetModelAsMappedByteBuffer();
@@ -54,7 +56,6 @@ namespace MelanomaClassification.Droid
 
             //Map the classificationResult to the labels and sort the result to find which label has the highest probability
             var classificationModelList = new List<ModelPrediction>();
-
             for (var i = 0; i < labels.Count; i++)
             {
                 var label = labels[i];
@@ -113,4 +114,6 @@ namespace MelanomaClassification.Droid
             return byteBuffer;
         }
     }
+
+    
 }
