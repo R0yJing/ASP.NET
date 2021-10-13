@@ -57,7 +57,7 @@ namespace MelanomaClassification.Presenters
 
         public interface IViewAccountPage
         {
-
+            void LogoutApp();
         }
 
         public void SetEnableStoringRemote(bool value)
@@ -76,6 +76,7 @@ namespace MelanomaClassification.Presenters
 */
             }
         }
+
     }
     
 }

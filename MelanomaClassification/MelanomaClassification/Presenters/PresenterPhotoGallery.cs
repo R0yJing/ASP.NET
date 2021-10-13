@@ -11,6 +11,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms.Internals;
 using MelanomaClassification.Services;
+using Xamarin.Essentials;
+using System.Diagnostics;
 
 namespace MelanomaClassification.Presenters
 {
@@ -31,36 +33,47 @@ namespace MelanomaClassification.Presenters
         {
             this.vPhotoGallery = vPhotoGallery;
             mPhotoGallery = new ModelPhotoGallery();
-
-         
         }
 
 
-        public async void ImportImage()
+        public async Task<bool> ImportImage()
         {
             try
             {
-                var predict = await mPhotoGallery.ImportPhotoAsync();
+           
+                var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions { Title = "tmp" });
+                if (result == null) return true;
+                var stream = await result.OpenReadAsync();
+
+                Console.WriteLine("stream returned");
+                var imported = ImageUtilityService.CreatePredictionWrapper(stream);
+
                 foreach (var wrapper in vPhotoGallery.GetAllData())
                 {
-                    if (Enumerable.SequenceEqual(wrapper.ImageData, predict.ImageData))
+                    if (Enumerable.SequenceEqual(wrapper.ImageData, imported.ImageData))
                     {
                         await App.Current.MainPage.DisplayAlert("Duplicate image", "This image is already imported!", "OK");
-                        return;
                     }
                 }
-                vPhotoGallery.AddPrediction(predict);
-                DatabaseService.PutAsync(predict);
+
+                
+                vPhotoGallery.AddPrediction(imported);
+                DatabaseService.PutAsync(imported);
 
             } catch(Exception e)
             {
                 Console.WriteLine(e.ToString());
-
+                return false;
             }
+            return true;
         }
 
         public void AddNewPredictionsIfAny() => 
             mPhotoGallery.GetAndRemoveNewPredictions().ForEach(Element => vPhotoGallery.AddPrediction(Element));
-
+        public  interface IViewPhotoGallery
+        {
+            void OnImport(object sender, EventArgs args);
+            void RemovePhoto(ModelPredictionWrapper wrapper);
+        }
     }
 }

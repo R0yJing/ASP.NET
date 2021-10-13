@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace MelanomaClassification.Views
 {
-    public class ViewAccountPage : ContentPage
+    public class ViewAccountPage : ContentPage, PresenterAccountPage.IViewAccountPage
     {
         private class Option
         {
@@ -28,7 +28,6 @@ namespace MelanomaClassification.Views
             new Option {Text = "Sign off"},
             new Option {Text = "Delete account"}
         };
-        public static void f() => Console.WriteLine("hello");
 
         private DataTemplate dataTemp = new DataTemplate(() =>
         {

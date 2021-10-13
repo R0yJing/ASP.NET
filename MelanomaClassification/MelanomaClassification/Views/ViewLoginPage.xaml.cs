@@ -24,11 +24,17 @@ namespace MelanomaClassification.Views
                 {
                     Console.WriteLine("logging in");
                     LoggingInIndicator.IsVisible = true;
-                    bool loggedIn = await UserService.LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+                    //bool loggedIn = await UserService.LoginAsync(UsernameEntry.Text, PasswordEntry.Text);
+                    string preferredClassifier = "local";//await DatabaseService.GetUserPreferredClassifier();
+                    if (preferredClassifier == "local")
+
+                        ClassifierServiceFactory.SetClassifier(DependencyService.Get<ILocalClassifierService>());
+                    else ClassifierServiceFactory.SetClassifier(new WebClassifierService());
 
                     LoggingInIndicator.IsVisible = false;
-                    if (loggedIn)
+                    if (true)
                     {
+                        DependencyService.Get<IKeyboardHelper>().HideKeyboard();
                         Shell.Current.FindByName<ShellContent>("OnLogin").IsVisible = false;
                         if (Shell.Current.FindByName<TabBar>("AfterLogin") == null)
                         {
@@ -36,7 +42,6 @@ namespace MelanomaClassification.Views
                         }
                         await Navigation.PushAsync(new ViewAccountPage());
                         Shell.Current.FindByName<TabBar>("AfterLogin").IsVisible = true;
-                        pLoginPage.SetUsername(UsernameEntry.Text);
 
                         
                     }

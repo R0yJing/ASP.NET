@@ -1,75 +1,52 @@
 ﻿using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using MelanomaClassification.Presenters;
-using System.Threading.Tasks;
-using System.Linq;
 using Plugin.Media;
-using Plugin.Media.Abstractions;
-using System.IO;
-using System.Net.Http;
-using Newtonsoft.Json;
 using MelanomaClassification.Models;
-using System.Collections.Generic;
+using MelanomaClassification.Views;
+using System.Threading.Tasks;
+using Plugin.Media.Abstractions;
 using MelanomaClassification.Services;
-using System.Diagnostics;
+using System.IO;
 
-namespace MelanomaClassification.Views
+namespace MelanomaClassification.Presenters
 {
-
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewCamera : ContentPage, PresenterCamera.IViewCamera
     {
-        private static bool appeared = false;
+        private bool PhotoTaken = false;
         private PresenterCamera pCamera;
-        private ClassifierServiceFactory factory = new ClassifierServiceFactory();
         public ViewCamera()
         {
-            InitializeComponent();
-            ClassifierServiceFactory.SetClassifier(DependencyService.Get<ILocalClassifierService>());
-
-            BindingContext = this;
             pCamera = new PresenterCamera(this);
-            
-
         }
-        public void TakePhoto()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override async void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            if (appeared)
+            if (PhotoTaken)
             {
-                Debug.WriteLine("Error");
-                return;
+                PhotoTaken = false;
             }
-            else appeared = false;
-            _ = await CrossMedia.Current.Initialize();
-
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            else
             {
-                Console.WriteLine("take photo is not supported");
-                return;
+                PhotoTaken = true;
+                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsPickPhotoSupported)
+                {
+                    throw new Exception("No support for camera");
+
+                }
+
+                var storeCamerMediaOptions = new StoreCameraMediaOptions()
+                {
+                    SaveToAlbum = true,
+                };
+
+                MediaFile photoFile = await CrossMedia.Current.TakePhotoAsync(storeCamerMediaOptions);
+
+
+                if (photoFile == null) return;
+
+                await pCamera.LaunchCameraAsync(photoFile);
+                
             }
-            var storeCamerMediaOptions = new StoreCameraMediaOptions()
-            {
-                SaveToAlbum = true,
-            };
-
-            MediaFile photoFile = await CrossMedia.Current.TakePhotoAsync(storeCamerMediaOptions);
-            var predict = await factory.GetClassifierService().MakePredictions(photoFile.GetStream());
-            var data = ImageUtilityService.CreatePredictionWrapper(photoFile.GetStream(), predict);
-            
-            Task<bool> task = pCamera.DisplayPrediction(predict);
-            ModelPhotoGallery.NewPredictions.Add(data);
-            await Task.WhenAll(task);
-
-
         }
-
-
     }
 }

@@ -27,7 +27,7 @@ namespace MelanomaClassification.Droid
         private readonly TensorFlowInferenceInterface _inferenceInterface;
         private readonly string[] _labels;
 
-        public async Task<ModelPrediction> MakePredictions(Stream stream)
+        public async Task<List<ModelPrediction>> MakePredictions(Stream stream)
         {
             var bitmap = await BitmapFactory.DecodeStreamAsync(stream);
 
@@ -37,12 +37,21 @@ namespace MelanomaClassification.Droid
             _inferenceInterface.Run(new[] { OutputName });
             _inferenceInterface.Fetch(OutputName, outputs);
             //index is 1 or 0
-            var index = Array.IndexOf(outputs, outputs.Max());
-            ModelPrediction newPrediction = new ModelPrediction
+            //var index = Array.IndexOf(outputs, outputs.Max());
+            var predictions = new List<ModelPrediction>();
+
+            for (int i =0; i < outputs.Length; i++)
             {
-                Tag = Tag.GetTag(index),
-            };
-            return newPrediction;
+                var prediction = new ModelPrediction
+                {
+                    TagName = _labels[i],
+                    Probability = outputs[i],
+                };
+                predictions.Add(prediction);
+            }
+            //sort so the prediction with the highest probability of being corrects comes on top.
+            predictions.Sort((pA, pB) => pA.Probability > pB.Probability ? -1 : 1);
+            return predictions;
 
         }
         public ImageClassifier()

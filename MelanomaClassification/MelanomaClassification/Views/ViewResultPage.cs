@@ -1,29 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using MelanomaClassification.Models;
 using MelanomaClassification.Presenters;
 using Xamarin.Forms;
 
 namespace MelanomaClassification.Views
 {
-    [QueryProperty(nameof(Result), "resultId")]
-    public class ViewResultPage : ContentPage
+    [QueryProperty(nameof(Result), "result")]
+    public class ViewResultPage : ContentPage, PresenterResultPage.IViewResultPage
     {
         private const string initVal = "undefined";
 
         private Image visualAid = new Image();
         private readonly Label resultLbl = new Label { Text = initVal };
-        private readonly Button reclassifyBtn = new Button { Text = "Re-classify"};
+        private readonly Button reclassifyBtn = new Button { Text = "Re-classify" };
 
-      
+
 
         private PresenterResultPage pResultPage;
-       
+
         public ViewResultPage()
         {
             pResultPage = new PresenterResultPage(this);
-    
+
             Content = new StackLayout
             {
                 Children =
@@ -33,6 +35,7 @@ namespace MelanomaClassification.Views
                     reclassifyBtn
                 }
             };
+
             reclassifyBtn.Command = new Command(Reclassify);
 
         }
@@ -40,22 +43,31 @@ namespace MelanomaClassification.Views
         public async void Reclassify()
         {
             //go back to the camera page
-            var thisPage= await Navigation.PopAsync();
-            if (nameof(thisPage) == nameof(ViewPhotoGallery)) {
-               await Shell.Current.GoToAsync(nameof(ViewCamera));
-
-            }
+            var thisPage = await Navigation.PopAsync();
+            
         }
 
         public string Result
         {
-            set => pResultPage.LoadResult(value);
+
+            set
+            {
+                foreach(var page in Navigation.NavigationStack)
+                {
+                    Debug.WriteLine(page);
+                }
+                string[] result = value.Split(':');
+                var tags = result[0].Split('/');
+                var probs = result[1].Split('/');
+
+                pResultPage.LoadResult(tags, probs);
+            }
         }
 
         public void SetVisAid(Image p)
         {
             visualAid.Source = p.Source;
-           
+
         }
 
         public void SetResultText(string v)
@@ -68,4 +80,3 @@ namespace MelanomaClassification.Views
     }
 }
 
-        

@@ -9,7 +9,7 @@ namespace MelanomaClassification.Services
         private static IClassifierService ConcreteService;
         public static void SetClassifier(IClassifierService service) => ConcreteService = service;
 
-        public IClassifierService GetClassifierService() 
+        public static IClassifierService GetClassifierService() 
         {
             if (ConcreteService == null) throw new NullReferenceException("Concrete Classifier Service is null");
             return ConcreteService; 

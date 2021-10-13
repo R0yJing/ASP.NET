@@ -42,7 +42,9 @@
     </Shell.Resources>
     <TabBar x:Name="AfterLogin" IsVisible="False"  >
         <Tab Title="My Account">
-            <ShellContent ContentTemplate="{DataTemplate local:ViewAccountPage}" />
+            <ShellContent ContentTemplate="{DataTemplate local:ViewAccountPage}"
+                          Route="ViewAccountPage"/>
+            
         </Tab>
         <Tab Title="Camera" Icon="Assets/IconCamera.png">
             <ShellContent ContentTemplate="{DataTemplate local:ViewCamera}" />

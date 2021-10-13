@@ -12,17 +12,21 @@ namespace MelanomaClassification.Services
 {
     public class UserService
     {
-        private static string rootUrl { 
-            get 
-            { if (!UnitTestDetector.xunitActive)
-                    return "http://192.168.1.8:45456";
-                else return "http://localhost:44332";
+        private static string rootUrl
+        {
+            get
+            {
+                if (!UnitTestDetector.xunitActive)
+                    return "http://192.168.1.9:45455";
+                else return "https://localhost:44332";
             }
             set { }
         }
+
+        private string Token = null;
         private static string localHostUrl
         {
-            get { return "http://localhost:44332";  }
+            get { return "http://localhost:44332"; }
             set { }
         }
 
@@ -30,41 +34,69 @@ namespace MelanomaClassification.Services
 
         public static void Init()
         {
-            var httpClientHandler = new HttpClientHandler();
-            httpClientHandler.ServerCertificateCustomValidationCallback =
-                (msg, cert, chain, err) => { return true; };
-            client = new HttpClient(httpClientHandler);
+            if (client == null)
+            {
+                var httpClientHandler = new HttpClientHandler();
+                httpClientHandler.ServerCertificateCustomValidationCallback =
+                    (msg, cert, chain, err) => { return true; };
+                client = new HttpClient(httpClientHandler);
+            }
         }
-        
-            
-            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            //client.DefaultRequestHeaders.Accept.Add(new Me)
-        
+
+
+        public static async Task<int> GetNumberItems()
+        {
+            var response = client.GetAsync(rootUrl + "/api/ImageData/CurrentUser");
+            try
+            {
+                var str = JsonConvert.DeserializeObject(await response.Result.Content.ReadAsStringAsync()) as string;
+                return int.Parse(str);
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return -1;
+            }
+
+        }
+
+        internal static Task<bool> DeleteUserAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //client.DefaultRequestHeaders.Accept.Add(new Me)
+
 
         public static async void UpdateRemote()
         {
-            List<SQL_ModelPrediction> predictions = await DatabaseService.GetAllAsync();
-
-            predictions.ForEach(prediction =>
+            List<SQL_ModelPrediction> predictions = await DatabaseService.GetUserPredictionDataAsync();
+            foreach (var prediction in predictions)
             {
                 var json = JsonConvert.SerializeObject(prediction);
 
                 var content = new StringContent(json);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                client.PostAsync(rootUrl + "/api/UsersPhotos", content);
-            });
+                await client.PostAsync(rootUrl + "/api/ImageData", content);
+            }
+
         }
 
         private static async void RetrieveFromRemote()
         {
             var response = await client.GetAsync(rootUrl + "/api/UsersPhotos");
-            
+
             var userData = JsonConvert.DeserializeObject<List<SQL_ModelPrediction>>(await response.Content.ReadAsStringAsync());
-            await DatabaseService.PutAll(userData);
-            Debug.WriteLine("Retrieved all");
+            //await DatabaseService.PutAll(userData);
+            userData.ForEach(data => DatabaseService.PutAllAsync(userData));
+
 
         }
+
+
         public static async Task<bool> LoginAsync(string name, string pswd)
         {
             Debug.WriteLine(rootUrl);
@@ -79,24 +111,35 @@ namespace MelanomaClassification.Services
             var request = new HttpRequestMessage(HttpMethod.Post,
                 rootUrl + "/Token");
             Console.WriteLine(client.DefaultRequestHeaders.ToString());
-          
             request.Content = new FormUrlEncodedContent(keyVals);
             //take request
             HttpResponseMessage response = await client.SendAsync(request);
+
+            var resp = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as LoginResponse;
+
             Debug.WriteLine(await response.Content.ReadAsStringAsync());
             return response.IsSuccessStatusCode;
 
         }
 
-        internal async Task<bool> UpdateRemoteAsync(List<ModelPredictionWrapper> saveItems)
+        private class LoginResponse
         {
-            throw new NotImplementedException();
+            public string Token { get; set; }
+            public string Token_Type { get; set; }
+            public long expiresIn { get; set; }
+            public string UserName { get; set; }
+            public string Issued { get; set; }
+            public string Expires { get; set; }
         }
 
-        public async void LogOff()
+        public static async Task<bool> LogOffAsync()
         {
-            var response = client.PostAsync(rootUrl + "/api/Account/Logout", null);
-
+            HttpResponseMessage response = await client.PostAsync(rootUrl + "/api/Account/Logout", null);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
         public static async Task<bool> RegisterAsync(string username, string pswd, string confmPswd)
         {
@@ -127,5 +170,14 @@ namespace MelanomaClassification.Services
                 throw e;
             }
         }
+
+        private static class LogoffSettings
+        {
+            public static string AccessToken { get; set; }
+            public static string Username { get; set; }
+            public static string Password { get; set; }
+        }
     }
+
+
 }
