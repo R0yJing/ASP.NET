@@ -51,6 +51,7 @@ Xamarin.Forms.Platform.Android.dll
 Xamarin.Forms.Platform.dll
 Xamarin.Google.Android.Material.dll
 Xamarin.Google.Guava.ListenableFuture.dll
+Xamarin.TensorFlow.Lite.dll
 androidx.versionedparcelable.versionedparcelable.aar
 androidx.lifecycle.lifecycle-runtime.aar
 androidx.core.core.aar

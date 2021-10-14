@@ -15,7 +15,7 @@ namespace MelanomaClassification.Views
         private const string initVal = "undefined";
 
         private Image visualAid = new Image();
-        private readonly Label resultLbl = new Label { Text = initVal };
+        private readonly Label resultLbl = new Label { Text = initVal, FontSize=18 };
         private readonly Button reclassifyBtn = new Button { Text = "Re-classify" };
 
 
@@ -72,7 +72,7 @@ namespace MelanomaClassification.Views
 
         public void SetResultText(string v)
         {
-
+            
             resultLbl.Text = v;
         }
 

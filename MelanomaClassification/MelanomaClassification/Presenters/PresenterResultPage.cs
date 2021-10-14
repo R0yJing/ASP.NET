@@ -32,7 +32,7 @@ namespace MelanomaClassification.Presenters
             {
                 for (int i = 0; i < prob.Length - 1; i++)
                 {
-                    resultText += "Probability of " + tags[i] + " : " + (double.Parse(prob[i]) * 100) + "%";
+                    resultText += "Probability of " + tags[i] + " : " + (double.Parse(prob[i]) * 100) + "%\n";
                 }
                 resultText += "This image is most likely " + tags[0];
             }

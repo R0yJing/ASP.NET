@@ -1,2 +1,3 @@
-Benign
-Malignant
+benign
+malignant
+unknown

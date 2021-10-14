@@ -6,6 +6,152 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Benign\ISIC_0362853.jpg" />
+    <None Remove="Assets\Benign\ISIC_0401078.jpg" />
+    <None Remove="Assets\Benign\ISIC_0463621.jpg" />
+    <None Remove="Assets\Benign\ISIC_0495675.jpg" />
+    <None Remove="Assets\Benign\ISIC_0584566.jpg" />
+    <None Remove="Assets\Benign\ISIC_0615970.jpg" />
+    <None Remove="Assets\Benign\ISIC_0626118.jpg" />
+    <None Remove="Assets\Benign\ISIC_0771953.jpg" />
+    <None Remove="Assets\Benign\ISIC_0793501.jpg" />
+    <None Remove="Assets\Benign\ISIC_0844805.jpg" />
+    <None Remove="Assets\Benign\ISIC_0891469.jpg" />
+    <None Remove="Assets\Benign\ISIC_1249702.jpg" />
+    <None Remove="Assets\Benign\ISIC_1251639.jpg" />
+    <None Remove="Assets\Benign\ISIC_1350991.jpg" />
+    <None Remove="Assets\Benign\ISIC_1464284.jpg" />
+    <None Remove="Assets\Benign\ISIC_1513596.jpg" />
+    <None Remove="Assets\Benign\ISIC_1633379.jpg" />
+    <None Remove="Assets\Benign\ISIC_1662872.jpg" />
+    <None Remove="Assets\Benign\ISIC_1745458.jpg" />
+    <None Remove="Assets\Benign\ISIC_1825481.jpg" />
+    <None Remove="Assets\Benign\ISIC_1852987.jpg" />
+    <None Remove="Assets\Benign\ISIC_1875729.jpg" />
+    <None Remove="Assets\Benign\ISIC_1892011.jpg" />
+    <None Remove="Assets\Benign\ISIC_1901298.jpg" />
+    <None Remove="Assets\Benign\ISIC_1928712.jpg" />
+    <None Remove="Assets\Benign\ISIC_1991157.jpg" />
+    <None Remove="Assets\Benign\ISIC_1991528.jpg" />
+    <None Remove="Assets\Benign\ISIC_2005921.jpg" />
+    <None Remove="Assets\Benign\ISIC_2079466.jpg" />
+    <None Remove="Assets\Benign\ISIC_2095143.jpg" />
+    <None Remove="Assets\Benign\ISIC_2146087.jpg" />
+    <None Remove="Assets\Benign\ISIC_2193727.jpg" />
+    <None Remove="Assets\Benign\ISIC_2393348.jpg" />
+    <None Remove="Assets\Benign\ISIC_2421486.jpg" />
+    <None Remove="Assets\Benign\ISIC_2437188.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0362853.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0401078.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0463621.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0495675.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0584566.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0615970.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0626118.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0771953.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0793501.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0844805.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_0891469.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1249702.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1251639.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1350991.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1464284.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1513596.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1633379.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1662872.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1745458.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1825481.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1852987.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1875729.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1892011.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1901298.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1928712.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1991157.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_1991528.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_2005921.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_2079466.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_2095143.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_2146087.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_2193727.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_2393348.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_2421486.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Benign\ISIC_2437188.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
@@ -14,116 +160,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ViewCamera.xaml.cs">
+      <DependentUpon>ViewCamera.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\ViewCamera.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\ViewUserInfo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Assets\Benign\ISIC_0362853.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0401078.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0463621.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0495675.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0584566.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0615970.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0626118.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0771953.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0793501.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0844805.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_0891469.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1249702.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1251639.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1350991.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1464284.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1513596.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1633379.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1662872.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1745458.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1825481.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1852987.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1875729.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1892011.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1901298.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1928712.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1991157.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_1991528.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_2005921.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_2079466.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_2095143.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_2146087.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_2193727.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_2393348.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_2421486.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Benign\ISIC_2437188.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Assets\congratsIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Malign\ISIC_0275828.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

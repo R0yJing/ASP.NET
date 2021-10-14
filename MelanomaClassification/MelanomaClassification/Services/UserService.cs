@@ -82,7 +82,7 @@ namespace MelanomaClassification.Services
 
                 await client.PostAsync(rootUrl + "/api/ImageData", content);
             }
-
+            
         }
 
         private static async void RetrieveFromRemote()

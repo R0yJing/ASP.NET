@@ -1,17 +1,16 @@
-﻿
-using System;
-using System.Linq;
-using Android.Graphics;
-using Org.Tensorflow.Contrib.Android;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using Plugin.CurrentActivity;
-//code is adapted from https://techcommunity.microsoft.com/t5/windows-dev-appconsult/add-ai-feature-to-xamarin-forms-app/ba-p/318200
-
-using Xamarin.Forms;
-using Plugin.Media.Abstractions;
-using System.Collections.Generic;
+using Android.App;
+using Android.Graphics;
+using Java.IO;
+using Java.Nio;
+using Java.Nio.Channels;
 using MelanomaClassification.Models;
+using MelanomaClassification.Services;
+using Plugin.CurrentActivity;
+using Xamarin.Forms;
 
 //the DependencyAttribute specifies that platform specific service will be used at runtime
 [assembly: Dependency(typeof(MelanomaClassification.Droid.ImageClassifier))]
@@ -19,117 +18,101 @@ namespace MelanomaClassification.Droid
 {
     public class ImageClassifier : ILocalClassifierService
     {
-        private static readonly string ModelFile = "classifier.pb";
-        private static readonly string LabelFile = "labels.txt";
-        private static readonly string InputName = "Placeholder";
-        private static readonly string OutputName = "loss";
-        private static readonly int InputSize = 224;
-        private readonly TensorFlowInferenceInterface _inferenceInterface;
-        private readonly string[] _labels;
+        //FloatSize is a constant with the value of 4 because a float value is 4 bytes
+        private const int FloatSize = 4;
+        //PixelSize is a constant with the value of 3 because a pixel has three color channels: Red Green and Blue
+        private const int PixelSize = 3;
 
-        public async Task<List<ModelPrediction>> MakePredictions(Stream stream)
+        public async Task<List<ModelPrediction>> MakePredictions(Stream streamIn)
         {
-            var bitmap = await BitmapFactory.DecodeStreamAsync(stream);
 
-            var floatValues = GetBitmapPixels(bitmap);
-            var outputs = new float[_labels.Length];
-            _inferenceInterface.Feed(InputName, floatValues, 1, InputSize, InputSize, 3);
-            _inferenceInterface.Run(new[] { OutputName });
-            _inferenceInterface.Fetch(OutputName, outputs);
-            //index is 1 or 0
-            //var index = Array.IndexOf(outputs, outputs.Max());
-            var predictions = new List<ModelPrediction>();
+            var image = ImageUtilityService.GetByteArrFromImageStream(streamIn);
 
-            for (int i =0; i < outputs.Length; i++)
+            var mappedByteBuffer = GetModelAsMappedByteBuffer();
+            var interpreter = new Xamarin.TensorFlow.Lite.Interpreter(mappedByteBuffer);
+
+            //To resize the image, we first need to get its required width and height
+            var tensor = interpreter.GetInputTensor(0);
+            var shape = tensor.Shape();
+
+            var width = shape[1];
+            var height = shape[2];
+
+            var byteBuffer = GetPhotoAsByteBuffer(image, width, height);
+
+            //use StreamReader to import the labels from labels.txt
+            var streamReader = new StreamReader(CrossCurrentActivity.Current.Activity.Assets.Open("labels.txt"));
+
+            //Transform labels.txt into List<string>
+            var labels = streamReader.ReadToEnd().Split('\n').Select(s => s.Trim()).Where(s => !string.IsNullOrEmpty(s)).ToList();
+
+            //Convert our two-dimensional array into a Java.Lang.Object, the required input for Xamarin.TensorFlow.List.Interpreter
+            var outputLocations = new float[1][] { new float[labels.Count] };
+            var outputs = Java.Lang.Object.FromArray(outputLocations);
+
+            interpreter.Run(byteBuffer, outputs);
+            var classificationResult = outputs.ToArray<float[]>();
+
+            //Map the classificationResult to the labels and sort the result to find which label has the highest probability
+            var classificationModelList = new List<ModelPrediction>();
+            for (var i = 0; i < labels.Count; i++)
             {
-                var prediction = new ModelPrediction
+                var label = labels[i];
+                classificationModelList.Add(new ModelPrediction
                 {
-                    TagName = _labels[i],
-                    Probability = outputs[i],
-                };
-                predictions.Add(prediction);
+                    TagName = label,
+                    Probability = classificationResult[0][i]
+                });
             }
-            //sort so the prediction with the highest probability of being corrects comes on top.
-            predictions.Sort((pA, pB) => pA.Probability > pB.Probability ? -1 : 1);
-            return predictions;
+            classificationModelList.Sort((a, b) => a.Probability < b.Probability ? 1 : -1);
 
+            return classificationModelList;
         }
-        public ImageClassifier()
+
+        //Convert model.tflite to Java.Nio.MappedByteBuffer , the require type for Xamarin.TensorFlow.Lite.Interpreter
+        private MappedByteBuffer GetModelAsMappedByteBuffer()
         {
-            try
-            {
-                var assets = CrossCurrentActivity.Current.Activity.Assets;
+            var assetDescriptor = Android.App.Application.Context.Assets.OpenFd("classifierv2.tflite");
+            var inputStream = new FileInputStream(assetDescriptor.FileDescriptor);
 
-                _inferenceInterface = new TensorFlowInferenceInterface(assets, ModelFile);
-                if (_inferenceInterface == null) Console.WriteLine("Could not instantiate tf model");
+            var mappedByteBuffer = inputStream.Channel.Map(FileChannel.MapMode.ReadOnly, assetDescriptor.StartOffset, assetDescriptor.DeclaredLength);
 
-                using var sr = new StreamReader(CrossCurrentActivity.Current.Activity.Assets.Open(LabelFile));
-                _labels = sr.ReadToEnd().Split("\n").Select(x => x.Trim()).Where(x => !string.IsNullOrEmpty(x)).ToArray();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-
-            }
-
+            return mappedByteBuffer;
         }
 
-
-
-
-        private async Task<byte[]> LoadByteArrayFromAssetsAsync(string name)
+        //Resize the image for the TensorFlow interpreter
+        private ByteBuffer GetPhotoAsByteBuffer(byte[] image, int width, int height)
         {
-            using (var s = CrossCurrentActivity.Current.Activity.Assets.Open(name))
-            using (var ms = new MemoryStream())
+            var bitmap = BitmapFactory.DecodeByteArray(image, 0, image.Length);
+            var resizedBitmap = Bitmap.CreateScaledBitmap(bitmap, width, height, true);
+
+            var modelInputSize = FloatSize * height * width * PixelSize;
+            var byteBuffer = ByteBuffer.AllocateDirect(modelInputSize);
+            byteBuffer.Order(ByteOrder.NativeOrder());
+
+            var pixels = new int[width * height];
+            resizedBitmap.GetPixels(pixels, 0, resizedBitmap.Width, 0, 0, resizedBitmap.Width, resizedBitmap.Height);
+
+            var pixel = 0;
+
+            //Loop through each pixels to create a Java.Nio.ByteBuffer
+            for (var i = 0; i < width; i++)
             {
-                await s.CopyToAsync(ms);
-                ms.Seek(0, SeekOrigin.Begin);
-                return ms.ToArray();
-            }
-        }
-
-
-
-        private static float[] GetBitmapPixels(Bitmap bitmap)
-        {   //bitmap dimensions
-            var floatValues = new float[InputSize * InputSize * 3];
-            using (var scaledBitmap = Bitmap.CreateScaledBitmap(bitmap, InputSize, InputSize, false))
-            {
-                using (var resizedBitmap = scaledBitmap.Copy(Bitmap.Config.Argb8888, false))
+                for (var j = 0; j < height; j++)
                 {
-                    var intValues = new int[InputSize * InputSize];
-                    //must resize the original bitmap into 224 x 224 in order to send the bitmap to the tf model for processing
-                    //the input size is verified via https://netron.app/
+                    var pixelVal = pixels[pixel++];
 
-                    resizedBitmap.GetPixels(intValues, 0, resizedBitmap.Width, 0, 0, resizedBitmap.Width, resizedBitmap.Height);
-                    //the resize bitmap must be converted to binary data as tf model only understands binaries
-
-                    for (int r = 0; r < resizedBitmap.Height; r++)
-                    {
-                        for (int c = 0; c < resizedBitmap.Width; c++)
-                        {
-                            int val = intValues[r * resizedBitmap.Width + c];
-                            //red
-                            floatValues[r * 3 + c * 3] = ((val & 0xFF) - 104);
-                            //green
-                            floatValues[r * 3 + c * 3 + 1] = ((val & 0xFF) - 117);
-                            //blue
-                            floatValues[r * 3 + c * 3 + 2] = ((val & 0xFF) - 123);
-
-                        }
-
-
-                    }
-                    resizedBitmap.Recycle();
-
+                    byteBuffer.PutFloat(pixelVal >> 16 & 0xFF);
+                    byteBuffer.PutFloat(pixelVal >> 8 & 0xFF);
+                    byteBuffer.PutFloat(pixelVal & 0xFF);
                 }
-                scaledBitmap.Recycle();
-
             }
-            return floatValues;
+
+            bitmap.Recycle();
+
+            return byteBuffer;
         }
-
-
     }
+
 
 }

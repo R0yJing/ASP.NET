@@ -11,6 +11,7 @@ namespace MelanomaClassification.Services
     public interface IClassifierService
     {
 
+
         Task<List<ModelPrediction>> MakePredictions(Stream photoStream);
 
     }

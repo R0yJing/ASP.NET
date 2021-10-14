@@ -41,24 +41,28 @@ namespace MelanomaClassification.Presenters
             try
             {
            
-                var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions { Title = "tmp" });
-                if (result == null) return true;
-                var stream = await result.OpenReadAsync();
+                var photoChosen = await MediaPicker.PickPhotoAsync(new MediaPickerOptions { Title = "tmp" });
+                if (photoChosen == null) return true;
+                var stream = await photoChosen.OpenReadAsync();
+                /*var streamCpy = new MemoryStream();
+                stream.CopyTo(streamCpy);*/
 
                 Console.WriteLine("stream returned");
-                var imported = ImageUtilityService.CreatePredictionWrapper(stream);
-
+                var predictionWrapper = ImageUtilityService.CreatePredictionWrapper(stream);
+               
                 foreach (var wrapper in vPhotoGallery.GetAllData())
                 {
-                    if (Enumerable.SequenceEqual(wrapper.ImageData, imported.ImageData))
+                    if (Enumerable.SequenceEqual(wrapper.ImageData, predictionWrapper.ImageData))
                     {
                         await App.Current.MainPage.DisplayAlert("Duplicate image", "This image is already imported!", "OK");
                     }
                 }
-
+                var result = await ClassifierServiceFactory.GetClassifierService().MakePredictions(stream);
                 
-                vPhotoGallery.AddPrediction(imported);
-                DatabaseService.PutAsync(imported);
+                predictionWrapper.Predictions = result;
+                ModelPhotoGallery.NewPredictions.Add(predictionWrapper);
+                DatabaseService.PutAsync(predictionWrapper);
+                //await Shell.Current.GoToAsync(nameof(ViewResultPage) + $"?{predictionWrapper}");
 
             } catch(Exception e)
             {
@@ -68,12 +72,19 @@ namespace MelanomaClassification.Presenters
             return true;
         }
 
-        public void AddNewPredictionsIfAny() => 
-            mPhotoGallery.GetAndRemoveNewPredictions().ForEach(Element => vPhotoGallery.AddPrediction(Element));
+        public void AddNewPredictionsIfAny()
+        {
+            var newPreds = mPhotoGallery.GetAndRemoveNewPredictions();
+            if (newPreds.Count > 0)
+            {
+                mPhotoGallery.GetAndRemoveNewPredictions().ForEach(Element => vPhotoGallery.AddPrediction(Element));
+                vPhotoGallery.ImageHistView.ScrollTo(vPhotoGallery.imageHistory.Count - 1);
+            }
+        }
         public  interface IViewPhotoGallery
         {
             void OnImport(object sender, EventArgs args);
-            void RemovePhoto(ModelPredictionWrapper wrapper);
+            void RemoveFromHistory(ModelPredictionWrapper wrapper);
         }
     }
 }

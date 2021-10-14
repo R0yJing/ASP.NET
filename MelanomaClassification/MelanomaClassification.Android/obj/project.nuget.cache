@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MevGqK76LQP88RsrK1DSeSrKKV0Nfn0lLt+ogWa/O7BQ7iX72LfzpoRNx7uT7TgYcUVKoECeVkwgUuYJwzYm5w==",
+  "dgSpecHash": "F4qChBnPOebWMK7LLaKbwM4iMfxOs7EXJCjW4HQaWqwFhkTCp7t5AIy9mPVYAnnuV5zNQiL9wKDHL9XUbAemyQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Roy\\Desktop\\MobSysDev\\MelanomaApp\\MelanomaClassification\\MelanomaClassification.Android\\MelanomaClassification.Android.csproj",
   "expectedPackageFiles": [
@@ -64,7 +64,8 @@
     "C:\\Users\\Roy\\.nuget\\packages\\xamarin.essentials\\1.6.1\\xamarin.essentials.1.6.1.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\5.0.0.2012\\xamarin.forms.5.0.0.2012.nupkg.sha512",
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.google.android.material\\1.2.1.1\\xamarin.google.android.material.1.2.1.1.nupkg.sha512",
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.google.guava.listenablefuture\\1.0.0.2\\xamarin.google.guava.listenablefuture.1.0.0.2.nupkg.sha512"
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\xamarin.google.guava.listenablefuture\\1.0.0.2\\xamarin.google.guava.listenablefuture.1.0.0.2.nupkg.sha512",
+    "C:\\Users\\Roy\\.nuget\\packages\\xamarin.tensorflow.lite\\2.4.0\\xamarin.tensorflow.lite.2.4.0.nupkg.sha512"
   ],
   "logs": []
 }

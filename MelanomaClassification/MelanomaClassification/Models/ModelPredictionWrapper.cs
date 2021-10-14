@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using Xamarin.Forms;
 
@@ -42,7 +43,7 @@ namespace MelanomaClassification.Models
             {
                 try
                 {
-                    return Predictions[0]?.Probability.ToString("P");
+                    return To2DP_Percent(Predictions[0]?.Probability);
                 }
                 catch (Exception) { return ""; }
             }
@@ -66,7 +67,7 @@ namespace MelanomaClassification.Models
             {
                 try
                 {
-                    return Predictions[1]?.Probability.ToString("P");
+                    return To2DP_Percent(Predictions[1]?.Probability);
                 }
                 catch (Exception) { return ""; }
             }
@@ -80,7 +81,7 @@ namespace MelanomaClassification.Models
                 {
                     return Predictions[2]?.TagName;
                 }
-                catch (Exception e) { return ""; }
+                catch (Exception) { return ""; }
             }
             set { }
         }
@@ -90,9 +91,9 @@ namespace MelanomaClassification.Models
             {
                 try
                 {
-                    return Predictions[2]?.Probability.ToString("P");
+                    return To2DP_Percent(Predictions[2]?.Probability);
                 }
-                catch (Exception e) { return ""; }
+                catch (Exception) { return ""; }
             }
             set { }
         }
@@ -113,6 +114,11 @@ namespace MelanomaClassification.Models
 
         public string Date { get; set; }
         public string ParentId { get; set; }
+        private string To2DP_Percent(double? val)
+        {
+            if (val == null) return "N/A";
+            return ((double)val).ToString("P2", new NumberFormatInfo { PercentPositivePattern = 1, PercentNegativePattern = 1 });
 
+        }
     }
 }

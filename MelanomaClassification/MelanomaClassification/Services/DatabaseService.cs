@@ -22,8 +22,10 @@ namespace MelanomaClassification.Services
             var listPredicts = await GetUserPredictionDataAsync();
 
             List<ModelPredictionWrapper> wrappers = ImageUtilityService.CreatePredictionWrapper(listImages, listPredicts);
+            
             foreach (var wrapper in wrappers)
             {
+                wrapper.Predictions.Sort((predA, predB) => predA.Probability > predB.Probability ? -1 : 1);
                 ModelPhotoGallery.NewPredictions.Add(wrapper);
             }
             return true;
@@ -49,6 +51,7 @@ namespace MelanomaClassification.Services
         }
         public static async Task<bool> Init()
         {
+            
             if (DbConn == null)
             {
                 DbConn = new SQLiteAsyncConnection(ConnString);

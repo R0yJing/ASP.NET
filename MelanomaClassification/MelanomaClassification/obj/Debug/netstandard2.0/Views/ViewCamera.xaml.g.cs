@@ -8,17 +8,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("MelanomaClassification.Views.ViewCamera.xaml", "Views/ViewCamera.xaml", typeof(global::MelanomaClassification.Views.ViewCamera))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("MelanomaClassification.Views.ViewCamera.xaml", "Views/ViewCamera.xaml", typeof(global::MelanomaClassification.Views.Page1))]
 
 namespace MelanomaClassification.Views {
     
     
     [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\ViewCamera.xaml")]
-    public partial class ViewCamera : global::Xamarin.Forms.ContentPage {
+    public partial class Page1 : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "2.0.0.0")]
         private void InitializeComponent() {
-            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(ViewCamera));
+            global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(Page1));
         }
     }
 }

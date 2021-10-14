@@ -6,6 +6,8 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout x:Name="mainScreen">
+
+                <Button Text="Test Classifier" Command="{Binding Cmd_TestLocally}"/>
                 <Entry x:Name="UsernameEntry" Placeholder="Enter email"/>
                 <Entry x:Name="PasswordEntry" Placeholder="Enter password" />
                 <Button Command="{Binding OnTapLogin}" Text="Login!"/>
@@ -21,5 +23,6 @@
                         </StackLayout>
                     </ContentView>
         </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

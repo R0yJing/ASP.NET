@@ -1981,3 +1981,9 @@ com.google.android.material.animation.TransformationCallback;com.google.android.
 Google.Common.Util.Concurrent.IListenableFuture, Xamarin.Google.Guava.ListenableFuture;com.google.common.util.concurrent.ListenableFuture
 Google.Common.Util.Concurrent.IListenableFuture;com.google.common.util.concurrent.ListenableFuture
 com.google.common.util.concurrent.ListenableFuture;com.google.common.util.concurrent.ListenableFuture
+Xamarin.TensorFlow.Lite.IDelegate, Xamarin.TensorFlow.Lite;org.tensorflow.lite.Delegate
+Xamarin.TensorFlow.Lite.IDelegate;org.tensorflow.lite.Delegate
+org.tensorflow.lite.Delegate;org.tensorflow.lite.Delegate
+Xamarin.TensorFlow.Lite.Annotations.IUsedByReflection, Xamarin.TensorFlow.Lite;org.tensorflow.lite.annotations.UsedByReflection
+Xamarin.TensorFlow.Lite.Annotations.IUsedByReflection;org.tensorflow.lite.annotations.UsedByReflection
+org.tensorflow.lite.annotations.UsedByReflection;org.tensorflow.lite.annotations.UsedByReflection

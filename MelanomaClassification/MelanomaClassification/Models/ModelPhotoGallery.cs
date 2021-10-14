@@ -11,15 +11,8 @@ namespace MelanomaClassification.Models
     public class ModelPhotoGallery
     {
 
-        Dictionary<Image, Stream> imagesToStreams = new Dictionary<Image, Stream>();
         public static ObservableCollection<ModelPredictionWrapper> NewPredictions = new ObservableCollection<ModelPredictionWrapper>();
-        public Image AddPairToDict(Image image, Stream stream)
-        {
-            imagesToStreams.Add(image, stream);
-            return image;
-
-        }
-
+        
         public ObservableCollection<ModelPredictionWrapper> GetAndRemoveNewPredictions()
         {
             var temp = new ObservableCollection<ModelPredictionWrapper>(NewPredictions);
@@ -27,15 +20,7 @@ namespace MelanomaClassification.Models
             return temp;
 
         }
-        public async Task<ModelPredictionWrapper> ImportPhotoAsync()
-        {
-            //MediaPicker.CapturePhotoAsync(new MediaPickerOptions());
-
-            /*var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions());
-            var stream = await result.OpenReadAsync(); 
-           */
-            return null;
-        }
+  
 
         public static async void StorePhotosTaken(byte[] ImgBytes, string probB, string probM, string probU)
         {

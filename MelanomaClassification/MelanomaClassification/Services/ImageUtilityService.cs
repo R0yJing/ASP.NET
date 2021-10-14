@@ -10,9 +10,10 @@ namespace MelanomaClassification.Services
     {
         public static byte[] GetByteArrFromImageStream(Stream sIn)
         {
+            sIn.Position = 0;
             BinaryReader bReader = new BinaryReader(sIn);
             return bReader.ReadBytes((int)sIn.Length);
-
+            
         }
         private static double ParsePercentage(string perc) => double.Parse(perc.Trim().Replace("%", ""));
         private static ModelPrediction ConvToModelPrediction(SQL_ModelPrediction sqlObj)

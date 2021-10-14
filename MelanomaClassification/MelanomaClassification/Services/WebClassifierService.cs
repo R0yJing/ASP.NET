@@ -15,7 +15,7 @@ namespace MelanomaClassification.Services
     public class WebClassifierService : IClassifierService
     {
         private HttpClient client;
-        private const string endpointUrl = "https://australiaeast.api.cognitive.microsoft.com/customvision/v3.0/Prediction/09917653-9816-4ebd-9607-77b22d913077/classify/iterations/Iteration1/image";
+        private const string endpointUrl = "https://australiaeast.api.cognitive.microsoft.com/customvision/v3.0/Prediction/09917653-9816-4ebd-9607-77b22d913077/classify/iterations/Iteration2/image";
         private const string webimage_endpointUrl = "https://australiaeast.api.cognitive.microsoft.com/customvision/v3.0/Prediction/09917653-9816-4ebd-9607-77b22d913077/classify/iterations/Iteration1/url";
         private string predictionKey = "c16aca3a55764d95ac293dc1343e14c3";
 
@@ -54,7 +54,15 @@ namespace MelanomaClassification.Services
 
             return (List<ModelPrediction>)resp.Predictions;
         }
-
+        public async Task<List<ModelPrediction>> MakePredictionsWithThreshold(Stream photoStream, double probThreshold)
+        {
+            var listPreds = await MakePredictions(photoStream);
+            if (listPreds[0].Probability >= probThreshold)
+            {
+                return listPreds;
+            }
+            else return null;
+        }
 
 
         private class JsonUrl

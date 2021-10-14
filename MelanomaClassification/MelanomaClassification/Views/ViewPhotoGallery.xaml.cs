@@ -24,12 +24,39 @@ namespace MelanomaClassification.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ViewPhotoGallery : ContentPage, PresenterPhotoGallery.IViewPhotoGallery
     {
-        private ObservableCollection<ModelPredictionWrapper> imageHistory = new ObservableCollection<ModelPredictionWrapper>();
-        public ICommand Delete
+        public ObservableCollection<ModelPredictionWrapper> imageHistory = new ObservableCollection<ModelPredictionWrapper>();
+        public CarouselView ImageHistView
         {
-            get { return new Command<ModelPredictionWrapper>(RemovePhoto); }
-        }
+            get => ImageHistory;
 
+        }
+        public ICommand Cmd_RemoveFromHistory
+        {
+            get
+            {
+                return new Command<ModelPredictionWrapper>(RemoveFromHistory);
+            }
+            
+        }
+        public async void RemoveFromHistory(ModelPredictionWrapper photo)
+        {
+            var result = await DisplayAlert("Confirmation needed", "Are you sure you'd like to remove this photo from Image History?", "Ok", "Cancel");
+            if (result)
+            {
+                Console.WriteLine("deleting");
+                imageHistory.Remove(photo);
+                try
+                {
+                    DatabaseService.DeleteByIdAsync(photo.ParentId);
+                }
+                catch (Exception)
+                {
+                    Debug.WriteLine("Cannot delete this photo");
+                }
+            }
+        
+
+    }
         public volatile bool ImportHasFinished = true;
         private void WaitWhileStillImporting()
         {
@@ -72,15 +99,7 @@ namespace MelanomaClassification.Views
                 return false;
             }
         }*/
-        public async void RemovePhoto(ModelPredictionWrapper self)
-        {
-            Console.WriteLine("deleting");
-            imageHistory.Remove(self);
-
-            DatabaseService.DeleteByIdAsync(self.ParentId);
-            //if (deleted) await DisplayAlert("Success", "Deletion succeeded", "OK");
-
-        }
+      
         public ViewPhotoGallery()
         {
             InitializeComponent();
@@ -111,14 +130,9 @@ namespace MelanomaClassification.Views
 
                     var predicts = await ClassifierServiceFactory.GetClassifierService().MakePredictions(mStream);
                     ((ModelPredictionWrapper) mPredictionWrapper).Predictions = predicts;
-                  
+                    
                     DatabaseService.PutAsync(mPredictionWrapper as ModelPredictionWrapper);
                     string resultString = mPredictionWrapper.ToString();
-                    foreach (var page in Navigation.NavigationStack)
-                    {
-                        Debug.WriteLine(page);
-                    }
-                    Debug.WriteLine("----------");
                     await Shell.Current.GoToAsync($"{nameof(ViewResultPage)}?result={resultString}");
                 });
             }
@@ -128,10 +142,9 @@ namespace MelanomaClassification.Views
 
         public async void OnImport(object sender, EventArgs e)
         {
-            ImportHasFinished = false;
             await pPhotoGallery.ImportImage();
+            
             pPhotoGallery.AddNewPredictionsIfAny();
-            ImportHasFinished = true;
             /*Device.BeginInvokeOnMainThread(async () => await AskForPermissions());
             var service = DependencyService.Get<IMultiPhotoPickerService>();
             service.OpenGallery();
@@ -143,13 +156,7 @@ namespace MelanomaClassification.Views
             }*/
         }
 
-        /*protected override void OnDisappearing()
-        {
-            //unsubscribe listening to the multiphoto selection event, otherwise a memory leak can result.
-            base.OnDisappearing();
-            MessagingCenter.Unsubscribe<App, List<string>>((App)Xamarin.Forms.Application.Current, "ImagesSelectedAndroid");
-            GC.Collect();
-        }*/
+    
 
 
         private PresenterPhotoGallery pPhotoGallery;
@@ -158,9 +165,7 @@ namespace MelanomaClassification.Views
 
         protected override void OnAppearing()
         {
-           
-            WaitWhileStillImporting();
-            
+            pPhotoGallery.AddNewPredictionsIfAny();
             base.OnAppearing();
         }
 
