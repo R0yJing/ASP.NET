@@ -19,9 +19,9 @@ namespace MelanomaClassification.Services
         private static string rootUrl
         {
             get
-            {
+            {   //get virtual ip for android. the port 45455 is read from Conveyor Belt
                 if (!UnitTestDetector.xunitActive)
-                    return "http://192.168.1.9:45456";
+                    return "http://" + "10.0.2.2" + ":45455";
                 else return "https://localhost:44332";
             }
             set { }
@@ -104,7 +104,7 @@ namespace MelanomaClassification.Services
                 new KeyValuePair<string, string>("grant_type", "password")
             };
 
-            rootUrl = "http://" + ip + ":45455";
+  
 
             var request = new HttpRequestMessage(HttpMethod.Post,
                 rootUrl + "/Token");
@@ -112,7 +112,11 @@ namespace MelanomaClassification.Services
             request.Content = new FormUrlEncodedContent(keyVals);
             //take request
             HttpResponseMessage response = await client.SendAsync(request);
-         
+            if (!response.IsSuccessStatusCode)
+            {
+                //App.Current.MainPage.DisplayAlert("Error", "Request timed out...", "Ok");
+                return false;
+            }
             JObject resp = JsonConvert.DeserializeObject<dynamic>(await response.Content.ReadAsStringAsync());
             var accessToken = resp.Value<string>("access_token");
             ModelAccountPage.AccessToken = accessToken;
