@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MelanomaClassification.Views.ViewPhotoGallery"
+             x:Name="ThisPage"
+             Title="Classification History"
+             >
+ 
+    <ContentPage.Content>
+        
+        <StackLayout>
+
+            <CarouselView x:Name="ImageHistory" Loop="False">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame HasShadow="True" BorderColor="DarkGray" HeightRequest="300">
+
+                            <Grid >
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"  />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Row="0" VerticalOptions="Start" MinimumHeightRequest="200" HeightRequest="200" HorizontalOptions="Center" Source="{Binding ASource}" />
+                                <StackLayout Grid.Row="1" VerticalOptions="End">
+                                    <Label x:Name="Placeholder0" />
+                                    <Label HorizontalTextAlignment="Center" Text="Prediction results"/>
+                                    <Grid HorizontalOptions="FillAndExpand" >
+                                        <BoxView HorizontalOptions="FillAndExpand" BackgroundColor="lightgreen"/>
+                                        <Grid BackgroundColor="White" Margin="0">
+                                            
+
+                                            <Grid.RowDefinitions>
+
+                                                <RowDefinition Height="Auto"/>
+
+                                            </Grid.RowDefinitions>
+                                            
+                                            <Label FontSize="Medium" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="End" FontAttributes="Bold" Text="{Binding TagNameBestProb}" />
+
+                                            <Label FontSize="Medium" Grid.Row="1" Grid.Column="2" FontAttributes="Bold" Text="{Binding ProbBestProb}" />
+
+                                            <Label FontSize="Medium" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="End" Text="{Binding TagNameMidProb}" />
+                                            <Label FontSize="Medium" Grid.Row="2" Grid.Column="2" Text="{Binding ProbMidProb}" />
+
+                                            <Label FontSize="Medium" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="End" Text="{Binding TagNameLowestProb}" />
+                                            <Label FontSize="Medium" Grid.Row="3" Grid.Column="2" Text="{Binding ProbLowestProb}" />
+
+                                        </Grid>
+                                    </Grid>
+                                    <StackLayout >
+                                       
+                                        <Button HorizontalOptions="CenterAndExpand"  Margin="15" Grid.Row="5" x:Name="DeleteButton" Text="   Remove this photo " TextColor="White" BackgroundColor="red"
+                                            Command="{Binding Source={x:Reference Name=ThisPage},
+                                            Path=BindingContext.Cmd_RemoveFromHistory}" CommandParameter="{Binding .}" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+
+
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <Button Margin="10" CornerRadius="20" HorizontalOptions="CenterAndExpand" x:Name="ImportButton" Text="Import More Photos" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

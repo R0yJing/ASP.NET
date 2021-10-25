@@ -1,0 +1,161 @@
+_id,name,meta.clinical.age_approx,meta.clinical.anatom_site_general,meta.clinical.benign_malignant,meta.clinical.clin_size_long_diam_mm,meta.clinical.diagnosis,meta.clinical.diagnosis_confirm_type,meta.clinical.family_hx_mm,meta.clinical.lesion_id,meta.clinical.mel_class,meta.clinical.mel_mitotic_index,meta.clinical.mel_thick_mm,meta.clinical.mel_type,meta.clinical.mel_ulcer,meta.clinical.melanocytic,meta.clinical.nevus_type,meta.clinical.patient_id,meta.clinical.personal_hx_mm,meta.clinical.sex,meta.acquisition.acquisition_day,meta.acquisition.blurry,meta.acquisition.color_tint,meta.acquisition.dermoscopic_type,meta.acquisition.hairy,meta.acquisition.image_type,meta.acquisition.marker_pen,meta.acquisition.pixelsX,meta.acquisition.pixelsY
+5e95f38a396583e25a508cd3,ISIC_0362853,35,lower extremity,benign,,,serial imaging showing no change,,IL_6333587,,,,,,,,IP_7180935,,female,,,,,,,,640,480
+5e95f386396583e25a508c7a,ISIC_0401078,55,posterior torso,benign,,,serial imaging showing no change,,IL_6855371,,,,,,,,IP_6939959,,female,,,,,,,,640,480
+5e95f389396583e25a508cbd,ISIC_0463621,65,lower extremity,benign,,,serial imaging showing no change,,IL_9007743,,,,,,,,IP_9748593,,female,,,,,,,,1872,1053
+5e95f385396583e25a508c4e,ISIC_0495675,30,lateral torso,benign,,,serial imaging showing no change,,IL_6646926,,,,,,,,IP_2085351,,female,,,,,,,,640,480
+5e95f38c396583e25a508cec,ISIC_0584566,40,upper extremity,benign,,,serial imaging showing no change,,IL_4155708,,,,,,,,IP_7785592,,male,,,,,,,,1872,1053
+5e95f38a396583e25a508cd6,ISIC_0615970,65,lower extremity,benign,,,serial imaging showing no change,,IL_9104142,,,,,,,,IP_9901629,,female,,,,,,,,1872,1053
+5e95f38c396583e25a508cee,ISIC_0626118,50,lateral torso,benign,,,serial imaging showing no change,,IL_0685800,,,,,,,,IP_4996313,,female,,,,,,,,640,480
+5e95f386396583e25a508c6b,ISIC_0771953,40,lateral torso,benign,,,serial imaging showing no change,,IL_1051500,,,,,,,,IP_4204657,,female,,,,,,,,640,480
+5e95f387396583e25a508c86,ISIC_0793501,70,lower extremity,benign,,,serial imaging showing no change,,IL_9546916,,,,,,,,IP_6204577,,female,,,,,,,,1872,1053
+5e95f386396583e25a508c7b,ISIC_0844805,45,lower extremity,benign,,,serial imaging showing no change,,IL_8007396,,,,,,,,IP_1253185,,male,,,,,,,,1872,1053
+5e95f384396583e25a508c30,ISIC_0891469,45,palms/soles,benign,,,serial imaging showing no change,,IL_2876092,,,,,,,,IP_6342369,,female,,,,,,,,1872,1053
+5e95f384396583e25a508c3d,ISIC_1249702,55,posterior torso,benign,,,serial imaging showing no change,,IL_5898880,,,,,,,,IP_7250026,,female,,,,,,,,1872,1053
+5e95f386396583e25a508c61,ISIC_1251639,15,upper extremity,benign,,,serial imaging showing no change,,IL_1071547,,,,,,,,IP_7826053,,female,,,,,,,,640,480
+5e95f383396583e25a508c1d,ISIC_1332597,55,lower extremity,benign,,,serial imaging showing no change,,IL_3009811,,,,,,,,IP_6049920,,female,,,,,,,,1872,1053
+5e95f389396583e25a508cb7,ISIC_1350991,85,lower extremity,benign,,,serial imaging showing no change,,IL_6210639,,,,,,,,IP_9718268,,female,,,,,,,,1872,1053
+5e95f384396583e25a508c41,ISIC_1464284,45,posterior torso,benign,,,serial imaging showing no change,,IL_6807570,,,,,,,,IP_0843629,,male,,,,,,,,1872,1053
+5e95f38a396583e25a508ccd,ISIC_1513596,40,lateral torso,benign,,,serial imaging showing no change,,IL_2845378,,,,,,,,IP_4639224,,male,,,,,,,,640,480
+5e95f38b396583e25a508ce0,ISIC_1633379,30,lower extremity,benign,,,serial imaging showing no change,,IL_4674754,,,,,,,,IP_7785592,,male,,,,,,,,640,480
+5e95f38a396583e25a508cd5,ISIC_1662872,40,lower extremity,benign,,,serial imaging showing no change,,IL_7258233,,,,,,,,IP_2584339,,male,,,,,,,,1872,1053
+5e95f385396583e25a508c58,ISIC_1745458,25,upper extremity,benign,,,serial imaging showing no change,,IL_2721917,,,,,,,,IP_2117218,,male,,,,,,,,640,480
+5e95f388396583e25a508c97,ISIC_1825481,20,lateral torso,benign,,,serial imaging showing no change,,IL_6347323,,,,,,,,IP_2026598,,male,,,,,,,,1872,1053
+5e95f386396583e25a508c76,ISIC_1852987,20,upper extremity,benign,,,serial imaging showing no change,,IL_7068146,,,,,,,,IP_2545631,,male,,,,,,,,640,480
+5e95f387396583e25a508c81,ISIC_1875729,40,head/neck,benign,,,serial imaging showing no change,,IL_1138275,,,,,,,,IP_7069391,,male,,,,,,,,1872,1053
+5e95f384396583e25a508c3b,ISIC_1892011,40,palms/soles,benign,,,serial imaging showing no change,,IL_9537020,,,,,,,,IP_6061014,,female,,,,,,,,640,480
+5e95f38a396583e25a508cd1,ISIC_1901298,45,upper extremity,benign,,,histopathology,,IL_2019135,,,,,,,,IP_2962626,,female,,,,,,,,1872,1053
+5e95f38a396583e25a508cc1,ISIC_1928712,25,anterior torso,benign,,,serial imaging showing no change,,IL_8514320,,,,,,,,IP_1512731,,male,,,,,,,,640,480
+5e95f383396583e25a508c1a,ISIC_1988336,40,lateral torso,benign,,,serial imaging showing no change,,IL_9083389,,,,,,,,IP_5474292,,male,,,,,,,,1872,1053
+5e95f385396583e25a508c49,ISIC_1991157,15,anterior torso,benign,,,serial imaging showing no change,,IL_3442666,,,,,,,,IP_4711011,,male,,,,,,,,640,480
+5e95f385396583e25a508c55,ISIC_1991528,40,lower extremity,benign,,,serial imaging showing no change,,IL_0173481,,,,,,,,IP_1246698,,female,,,,,,,,640,480
+5e95f388396583e25a508c9b,ISIC_2005921,40,anterior torso,benign,,,serial imaging showing no change,,IL_0139378,,,,,,,,IP_3858753,,male,,,,,,,,1872,1053
+5e95f387396583e25a508c8e,ISIC_2079466,50,anterior torso,benign,,,serial imaging showing no change,,IL_6309474,,,,,,,,IP_4996313,,female,,,,,,,,640,480
+5e95f387396583e25a508c87,ISIC_2095143,50,lower extremity,benign,,,serial imaging showing no change,,IL_4569102,,,,,,,,IP_9851472,,female,,,,,,,,1872,1053
+5e95f38c396583e25a508ced,ISIC_2146087,70,palms/soles,benign,,,serial imaging showing no change,,IL_8367823,,,,,,,,IP_5903849,,male,,,,,,,,1872,1053
+5e95f384396583e25a508c3c,ISIC_2193727,40,anterior torso,benign,,,serial imaging showing no change,,IL_8437577,,,,,,,,IP_7250026,,female,,,,,,,,640,480
+5e95f387396583e25a508c8d,ISIC_2393348,45,upper extremity,benign,,,serial imaging showing no change,,IL_9837389,,,,,,,,IP_4251788,,male,,,,,,,,640,480
+5e95f386396583e25a508c68,ISIC_2421486,35,anterior torso,benign,,,serial imaging showing no change,,IL_7294609,,,,,,,,IP_4466046,,male,,,,,,,,640,480
+5e95f385396583e25a508c50,ISIC_2437188,50,lower extremity,benign,,,serial imaging showing no change,,IL_6050503,,,,,,,,IP_7522397,,female,,,,,,,,1872,1053
+5e95f387396583e25a508c83,ISIC_2545299,30,upper extremity,benign,,,histopathology,,IL_0347796,,,,,,,,IP_4208266,,female,,,,,,,,1872,1053
+5e95f386396583e25a508c6d,ISIC_2741984,25,upper extremity,benign,,,serial imaging showing no change,,IL_9969032,,,,,,,,IP_5561220,,female,,,,,,,,640,480
+5e95f389396583e25a508cb5,ISIC_2755667,65,upper extremity,benign,,,serial imaging showing no change,,IL_3817416,,,,,,,,IP_6397153,,female,,,,,,,,640,480
+5e95f386396583e25a508c71,ISIC_2776488,40,upper extremity,benign,,,serial imaging showing no change,,IL_3810183,,,,,,,,IP_5111235,,male,,,,,,,,640,480
+5e95f384396583e25a508c3a,ISIC_2811080,40,posterior torso,benign,,,serial imaging showing no change,,IL_3105993,,,,,,,,IP_9644948,,female,,,,,,,,1872,1053
+5e95f383396583e25a508c1e,ISIC_2899837,50,upper extremity,benign,,,serial imaging showing no change,,IL_9874387,,,,,,,,IP_0148558,,female,,,,,,,,1872,1053
+5e95f38c396583e25a508cf2,ISIC_2996668,45,oral/genital,benign,,,serial imaging showing no change,,IL_9154343,,,,,,,,IP_8020102,,male,,,,,,,,640,480
+5e95f389396583e25a508caf,ISIC_3011638,40,upper extremity,benign,,,serial imaging showing no change,,IL_6485527,,,,,,,,IP_2584339,,male,,,,,,,,1872,1053
+5e95f383396583e25a508c20,ISIC_3047806,60,lower extremity,benign,,,serial imaging showing no change,,IL_0641773,,,,,,,,IP_6293754,,female,,,,,,,,1872,1053
+5e95f388396583e25a508c98,ISIC_3072382,50,lower extremity,benign,,,serial imaging showing no change,,IL_4191597,,,,,,,,IP_9557980,,female,,,,,,,,640,480
+5e95f38a396583e25a508ccf,ISIC_3158860,45,lower extremity,benign,,,serial imaging showing no change,,IL_4021217,,,,,,,,IP_4639224,,male,,,,,,,,640,480
+5e95f386396583e25a508c72,ISIC_3254499,45,posterior torso,benign,,,serial imaging showing no change,,IL_7962935,,,,,,,,IP_5111235,,male,,,,,,,,1872,1053
+5e95f384396583e25a508c32,ISIC_3310235,30,posterior torso,benign,,,serial imaging showing no change,,IL_9905983,,,,,,,,IP_5808038,,male,,,,,,,,640,480
+5e95f389396583e25a508cbb,ISIC_3317877,65,head/neck,benign,,,serial imaging showing no change,,IL_8089874,,,,,,,,IP_0998852,,female,,,,,,,,1872,1053
+5e95f385396583e25a508c53,ISIC_3380520,40,lower extremity,benign,,,serial imaging showing no change,,IL_6382859,,,,,,,,IP_7499536,,male,,,,,,,,640,480
+5e95f386396583e25a508c79,ISIC_3390356,30,lower extremity,benign,,,serial imaging showing no change,,IL_0909825,,,,,,,,IP_6332843,,male,,,,,,,,640,480
+5e95f388396583e25a508cab,ISIC_3395743,60,lower extremity,benign,,,serial imaging showing no change,,IL_0934252,,,,,,,,IP_6293754,,female,,,,,,,,1872,1053
+5e95f384396583e25a508c42,ISIC_3418978,25,anterior torso,benign,,,serial imaging showing no change,,IL_3946477,,,,,,,,IP_6346671,,male,,,,,,,,640,480
+5e95f387396583e25a508c92,ISIC_3459452,70,posterior torso,benign,,,serial imaging showing no change,,IL_0268792,,,,,,,,IP_3172139,,female,,,,,,,,640,480
+5e95f38b396583e25a508ce8,ISIC_3509891,45,anterior torso,benign,,,serial imaging showing no change,,IL_9245956,,,,,,,,IP_0148558,,female,,,,,,,,1872,1053
+5e95f387396583e25a508c82,ISIC_3649766,30,anterior torso,benign,,,serial imaging showing no change,,IL_9907082,,,,,,,,IP_2501903,,male,,,,,,,,640,480
+5e95f383396583e25a508c29,ISIC_3891437,45,posterior torso,benign,,,serial imaging showing no change,,IL_6263513,,,,,,,,IP_4548568,,male,,,,,,,,1872,1053
+5e95f387396583e25a508c7c,ISIC_3894224,60,lower extremity,benign,,,serial imaging showing no change,,IL_8282579,,,,,,,,IP_5867829,,male,,,,,,,,1872,1053
+5e95f389396583e25a508cb0,ISIC_3898738,30,lateral torso,benign,,,serial imaging showing no change,,IL_9705732,,,,,,,,IP_3025705,,female,,,,,,,,640,480
+5e95f389396583e25a508cbc,ISIC_3926261,30,lower extremity,benign,,,histopathology,,IL_2603381,,,,,,,,IP_9927968,,male,,,,,,,,640,480
+5e95f389396583e25a508cb9,ISIC_3999125,30,lower extremity,benign,,,serial imaging showing no change,,IL_3947351,,,,,,,,IP_7252102,,male,,,,,,,,640,480
+5e95f384396583e25a508c37,ISIC_4060049,45,anterior torso,benign,,,serial imaging showing no change,,IL_6640525,,,,,,,,IP_6692103,,male,,,,,,,,640,480
+5e95f386396583e25a508c74,ISIC_4108630,60,anterior torso,benign,,,serial imaging showing no change,,IL_0294374,,,,,,,,IP_9595383,,male,,,,,,,,1872,1053
+5e95f38c396583e25a508cf5,ISIC_4120704,50,palms/soles,benign,,,serial imaging showing no change,,IL_8871866,,,,,,,,IP_8759634,,female,,,,,,,,1872,1053
+5e95f386396583e25a508c6a,ISIC_4201327,45,lower extremity,benign,,,serial imaging showing no change,,IL_6742885,,,,,,,,IP_8916501,,male,,,,,,,,640,480
+5e95f388396583e25a508ca2,ISIC_4228799,55,lower extremity,benign,,,serial imaging showing no change,,IL_0566739,,,,,,,,IP_0093378,,male,,,,,,,,1872,1053
+5e95f387396583e25a508c84,ISIC_4405196,65,posterior torso,benign,,,serial imaging showing no change,,IL_4442475,,,,,,,,IP_5903849,,male,,,,,,,,640,480
+5e95f389396583e25a508cba,ISIC_4436833,60,anterior torso,benign,,,serial imaging showing no change,,IL_6559753,,,,,,,,IP_9901629,,female,,,,,,,,640,480
+5e95f385396583e25a508c5a,ISIC_4518384,30,anterior torso,benign,,,serial imaging showing no change,,IL_5901220,,,,,,,,IP_5440659,,male,,,,,,,,640,480
+5e95f385396583e25a508c4c,ISIC_4565629,45,oral/genital,benign,,,serial imaging showing no change,,IL_1955762,,,,,,,,IP_3370847,,male,,,,,,,,1872,1053
+5e95f389396583e25a508cb2,ISIC_4596089,45,upper extremity,benign,,,serial imaging showing no change,,IL_8239223,,,,,,,,IP_1197949,,male,,,,,,,,1872,1053
+5e95f388396583e25a508ca7,ISIC_4653167,30,lower extremity,benign,,,serial imaging showing no change,,IL_4028375,,,,,,,,IP_1023029,,female,,,,,,,,1872,1053
+5e95f388396583e25a508ca9,ISIC_4732985,85,posterior torso,benign,,,serial imaging showing no change,,IL_4335837,,,,,,,,IP_3324603,,female,,,,,,,,1872,1053
+5e95f38a396583e25a508cc8,ISIC_4839421,35,upper extremity,benign,,,serial imaging showing no change,,IL_9938133,,,,,,,,IP_5474292,,male,,,,,,,,640,480
+5e95f384396583e25a508c2f,ISIC_4863708,35,palms/soles,benign,,,serial imaging showing no change,,IL_6724933,,,,,,,,IP_6342369,,female,,,,,,,,640,480
+5e95f385396583e25a508c52,ISIC_4889196,80,lateral torso,benign,,,serial imaging showing no change,,IL_2485791,,,,,,,,IP_5339938,,female,,,,,,,,640,480
+5e95f386396583e25a508c67,ISIC_4904405,25,anterior torso,benign,,,serial imaging showing no change,,IL_2815260,,,,,,,,IP_2681677,,male,,,,,,,,640,480
+5e95f38b396583e25a508cdd,ISIC_4925442,40,lateral torso,benign,,,serial imaging showing no change,,IL_6674013,,,,,,,,IP_3970734,,male,,,,,,,,640,480
+5e95f385396583e25a508c5b,ISIC_5005065,50,posterior torso,benign,,,serial imaging showing no change,,IL_8899215,,,,,,,,IP_7415009,,female,,,,,,,,640,480
+5e95f387396583e25a508c93,ISIC_5051449,55,lateral torso,benign,,,serial imaging showing no change,,IL_4466321,,,,,,,,IP_8645527,,male,,,,,,,,1872,1053
+5e95f383396583e25a508c26,ISIC_5248304,35,upper extremity,benign,,,serial imaging showing no change,,IL_2887149,,,,,,,,IP_7702038,,male,,,,,,,,640,480
+5e95f386396583e25a508c73,ISIC_5435067,45,head/neck,benign,,,serial imaging showing no change,,IL_9573195,,,,,,,,IP_5111235,,male,,,,,,,,640,480
+5e95f38a396583e25a508ccb,ISIC_5501609,65,palms/soles,benign,,,serial imaging showing no change,,IL_3505491,,,,,,,,IP_5496892,,male,,,,,,,,1872,1053
+5e95f38b396583e25a508cdf,ISIC_5502229,50,palms/soles,benign,,,serial imaging showing no change,,IL_2086331,,,,,,,,IP_2160700,,male,,,,,,,,1872,1053
+5e95f38b396583e25a508cda,ISIC_5585279,25,lateral torso,benign,,,serial imaging showing no change,,IL_7345787,,,,,,,,IP_5174964,,male,,,,,,,,640,480
+5e95f383396583e25a508c23,ISIC_5663164,50,lower extremity,benign,,,serial imaging showing no change,,IL_5879040,,,,,,,,IP_0093378,,male,,,,,,,,640,480
+5e95f387396583e25a508c85,ISIC_5729266,40,posterior torso,benign,,,serial imaging showing no change,,IL_2274838,,,,,,,,IP_4021847,,male,,,,,,,,1872,1053
+5e95f385396583e25a508c46,ISIC_5754233,25,posterior torso,benign,,,serial imaging showing no change,,IL_7029620,,,,,,,,IP_3865267,,male,,,,,,,,640,480
+5e95f38b396583e25a508cdc,ISIC_5760582,60,posterior torso,benign,,,serial imaging showing no change,,IL_8842426,,,,,,,,IP_6318212,,female,,,,,,,,1872,1053
+5e95f389396583e25a508cb6,ISIC_5764302,40,upper extremity,benign,,,serial imaging showing no change,,IL_8550983,,,,,,,,IP_9927968,,male,,,,,,,,1872,1053
+5e95f385396583e25a508c4b,ISIC_5846004,40,lower extremity,benign,,,serial imaging showing no change,,IL_7056269,,,,,,,,IP_3370847,,male,,,,,,,,1872,1053
+5e95f388396583e25a508c94,ISIC_5907599,20,lower extremity,benign,,,serial imaging showing no change,,IL_6277057,,,,,,,,IP_2026598,,male,,,,,,,,1872,1053
+5e95f383396583e25a508c1c,ISIC_5926079,55,lower extremity,benign,,,serial imaging showing no change,,IL_3204802,,,,,,,,IP_5076578,,male,,,,,,,,1872,1053
+5e95f384396583e25a508c3e,ISIC_6000142,20,anterior torso,benign,,,serial imaging showing no change,,IL_8094376,,,,,,,,IP_7497232,,male,,,,,,,,640,480
+5e95f389396583e25a508cc0,ISIC_6000300,85,upper extremity,benign,,,serial imaging showing no change,,IL_1015260,,,,,,,,IP_3707904,,male,,,,,,,,1872,1053
+5e95f386396583e25a508c69,ISIC_6005775,25,upper extremity,benign,,,serial imaging showing no change,,IL_2672620,,,,,,,,IP_6676823,,female,,,,,,,,640,480
+5e95f38a396583e25a508cc3,ISIC_6089798,65,posterior torso,benign,,,serial imaging showing no change,,IL_2712221,,,,,,,,IP_2263888,,female,,,,,,,,640,480
+5e95f384396583e25a508c2e,ISIC_6096598,25,lower extremity,benign,,,serial imaging showing no change,,IL_8573875,,,,,,,,IP_2738065,,female,,,,,,,,1872,1053
+5e95f384396583e25a508c35,ISIC_6112879,45,anterior torso,benign,,,serial imaging showing no change,,IL_6762921,,,,,,,,IP_5450817,,male,,,,,,,,640,480
+5e95f385396583e25a508c5d,ISIC_6269414,15,palms/soles,benign,,,serial imaging showing no change,,IL_6166171,,,,,,,,IP_5068447,,female,,,,,,,,640,480
+5e95f38b396583e25a508ce1,ISIC_6388940,45,lower extremity,benign,,,serial imaging showing no change,,IL_6579340,,,,,,,,IP_3970734,,male,,,,,,,,1872,1053
+5e95f383396583e25a508c2c,ISIC_6679126,75,anterior torso,benign,,,serial imaging showing no change,,IL_7276809,,,,,,,,IP_7151331,,female,,,,,,,,1872,1053
+5e95f384396583e25a508c33,ISIC_6783448,35,lateral torso,benign,,,serial imaging showing no change,,IL_3453014,,,,,,,,IP_8330575,,male,,,,,,,,640,480
+5e95f387396583e25a508c8a,ISIC_6874100,55,lateral torso,benign,,,serial imaging showing no change,,IL_6294301,,,,,,,,IP_0093378,,male,,,,,,,,1872,1053
+5e95f383396583e25a508c1b,ISIC_6918981,45,upper extremity,benign,,,serial imaging showing no change,,IL_0727060,,,,,,,,IP_2584339,,male,,,,,,,,1872,1053
+5e95f387396583e25a508c80,ISIC_6982693,80,lower extremity,benign,,,histopathology,,IL_3037532,,,,,,,,IP_6292815,,female,,,,,,,,1872,1053
+5e95f386396583e25a508c75,ISIC_6986010,15,anterior torso,benign,,,serial imaging showing no change,,IL_3447012,,,,,,,,IP_2545631,,male,,,,,,,,640,480
+5e95f383396583e25a508c18,ISIC_7024807,25,lower extremity,benign,,,serial imaging showing no change,,IL_8802277,,,,,,,,IP_5174964,,male,,,,,,,,640,480
+5e95f388396583e25a508c9e,ISIC_7117369,30,lower extremity,benign,,,serial imaging showing no change,,IL_7873067,,,,,,,,IP_3281766,,female,,,,,,,,640,480
+5e95f38b396583e25a508ce9,ISIC_7216877,45,posterior torso,benign,,,serial imaging showing no change,,IL_1589803,,,,,,,,IP_1197949,,male,,,,,,,,1872,1053
+5e95f38c396583e25a508cf4,ISIC_7245999,40,lower extremity,benign,,,serial imaging showing no change,,IL_9740427,,,,,,,,IP_9102359,,male,,,,,,,,1872,1053
+5e95f385396583e25a508c4f,ISIC_7262282,35,lower extremity,benign,,,serial imaging showing no change,,IL_5784698,,,,,,,,IP_2085351,,female,,,,,,,,1872,1053
+5e95f383396583e25a508c27,ISIC_7279098,50,anterior torso,benign,,,serial imaging showing no change,,IL_9369079,,,,,,,,IP_8369251,,male,,,,,,,,640,480
+5e95f385396583e25a508c5e,ISIC_7319707,15,lower extremity,benign,,,serial imaging showing no change,,IL_4618189,,,,,,,,IP_5068447,,female,,,,,,,,640,480
+5e95f383396583e25a508c2b,ISIC_7368239,30,lower extremity,benign,,,serial imaging showing no change,,IL_0061273,,,,,,,,IP_2558686,,male,,,,,,,,640,480
+5e95f38b396583e25a508ce5,ISIC_7440448,65,posterior torso,benign,,,serial imaging showing no change,,IL_9959635,,,,,,,,IP_5496892,,male,,,,,,,,1872,1053
+5e95f385396583e25a508c51,ISIC_7588132,80,upper extremity,benign,,,serial imaging showing no change,,IL_5902633,,,,,,,,IP_5339938,,female,,,,,,,,640,480
+5e95f38a396583e25a508cd4,ISIC_7660797,45,upper extremity,benign,,,serial imaging showing no change,,IL_6355061,,,,,,,,IP_6977878,,male,,,,,,,,1872,1053
+5e95f38a396583e25a508cc6,ISIC_7682537,45,lateral torso,benign,,,serial imaging showing no change,,IL_1374449,,,,,,,,IP_3739659,,female,,,,,,,,640,480
+5e95f383396583e25a508c28,ISIC_7754760,60,posterior torso,benign,,,serial imaging showing no change,,IL_6381493,,,,,,,,IP_7334384,,male,,,,,,,,640,480
+5e95f387396583e25a508c91,ISIC_7890638,60,posterior torso,benign,,,serial imaging showing no change,,IL_1765262,,,,,,,,IP_7100012,,female,,,,,,,,640,480
+5e95f389396583e25a508cb3,ISIC_7951378,20,lower extremity,benign,,,serial imaging showing no change,,IL_9587326,,,,,,,,IP_2026598,,male,,,,,,,,1872,1053
+5e95f38b396583e25a508ce6,ISIC_8036377,50,upper extremity,benign,,,serial imaging showing no change,,IL_7488684,,,,,,,,IP_7005083,,female,,,,,,,,640,480
+5e95f38b396583e25a508cd8,ISIC_8157009,55,upper extremity,benign,,,serial imaging showing no change,,IL_8813095,,,,,,,,IP_0038545,,female,,,,,,,,1872,1053
+5e95f388396583e25a508c96,ISIC_8201757,85,anterior torso,benign,,,serial imaging showing no change,,IL_9823337,,,,,,,,IP_6051587,,female,,,,,,,,1872,1053
+5e95f386396583e25a508c66,ISIC_8300152,20,head/neck,benign,,,serial imaging showing no change,,IL_5504419,,,,,,,,IP_8237561,,female,,,,,,,,640,480
+5e95f386396583e25a508c70,ISIC_8369457,25,oral/genital,benign,,,serial imaging showing no change,,IL_5505871,,,,,,,,IP_8678278,,male,,,,,,,,640,480
+5e95f386396583e25a508c64,ISIC_8390671,70,lower extremity,benign,,,serial imaging showing no change,,IL_9489096,,,,,,,,IP_0951571,,female,,,,,,,,1872,1053
+5e95f38a396583e25a508ccc,ISIC_8431668,30,anterior torso,benign,,,serial imaging showing no change,,IL_0342541,,,,,,,,IP_3523549,,male,,,,,,,,640,480
+5e95f385396583e25a508c57,ISIC_8590181,45,palms/soles,benign,,,serial imaging showing no change,,IL_6143650,,,,,,,,IP_9639732,,male,,,,,,,,640,480
+5e95f384396583e25a508c38,ISIC_8719979,30,upper extremity,benign,,,serial imaging showing no change,,IL_7153985,,,,,,,,IP_6017019,,male,,,,,,,,640,480
+5e95f389396583e25a508cbe,ISIC_8790885,35,upper extremity,benign,,,serial imaging showing no change,,IL_5855221,,,,,,,,IP_3970734,,male,,,,,,,,640,480
+5e95f385396583e25a508c56,ISIC_8802922,45,lower extremity,benign,,,serial imaging showing no change,,IL_0748302,,,,,,,,IP_9639732,,male,,,,,,,,640,480
+5e95f38c396583e25a508cef,ISIC_8855901,55,lower extremity,benign,,,serial imaging showing no change,,IL_5292826,,,,,,,,IP_5311557,,female,,,,,,,,640,480
+5e95f386396583e25a508c78,ISIC_8918981,40,posterior torso,benign,,,serial imaging showing no change,,IL_3639814,,,,,,,,IP_1091619,,male,,,,,,,,640,480
+5e95f385396583e25a508c47,ISIC_8947924,30,upper extremity,benign,,,serial imaging showing no change,,IL_5085672,,,,,,,,IP_6029068,,male,,,,,,,,640,480
+5e95f389396583e25a508cb8,ISIC_8970543,75,lower extremity,benign,,,serial imaging showing no change,,IL_8877154,,,,,,,,IP_5903849,,male,,,,,,,,1872,1053
+5e95f388396583e25a508c9c,ISIC_8997983,45,lower extremity,benign,,,serial imaging showing no change,,IL_9608812,,,,,,,,IP_4639224,,male,,,,,,,,640,480
+5e95f384396583e25a508c36,ISIC_9010907,60,lower extremity,benign,,,serial imaging showing no change,,IL_7736782,,,,,,,,IP_5450817,,male,,,,,,,,1872,1053
+5e95f387396583e25a508c8c,ISIC_9051287,70,lower extremity,benign,,,serial imaging showing no change,,IL_9837854,,,,,,,,IP_2352610,,male,,,,,,,,1872,1053
+5e95f38b396583e25a508ce2,ISIC_9116587,65,lower extremity,benign,,,serial imaging showing no change,,IL_5561070,,,,,,,,IP_5903849,,male,,,,,,,,640,480
+5e95f38a396583e25a508cca,ISIC_9168624,55,palms/soles,benign,,,serial imaging showing no change,,IL_4145458,,,,,,,,IP_4639224,,male,,,,,,,,1872,1053
+5e95f389396583e25a508cac,ISIC_9295135,40,lower extremity,benign,,,serial imaging showing no change,,IL_2059441,,,,,,,,IP_1697215,,female,,,,,,,,1872,1053
+5e95f38c396583e25a508cf0,ISIC_9399967,35,posterior torso,benign,,,serial imaging showing no change,,IL_9895235,,,,,,,,IP_4387709,,male,,,,,,,,640,480
+5e95f384396583e25a508c45,ISIC_9402810,70,lateral torso,benign,,,serial imaging showing no change,,IL_8409580,,,,,,,,IP_6029234,,female,,,,,,,,640,480
+5e95f384396583e25a508c3f,ISIC_9549857,35,palms/soles,benign,,,serial imaging showing no change,,IL_7463385,,,,,,,,IP_7497232,,male,,,,,,,,1872,1053
+5e95f384396583e25a508c39,ISIC_9565803,25,anterior torso,benign,,,serial imaging showing no change,,IL_8947296,,,,,,,,IP_8766487,,female,,,,,,,,640,480
+5e95f386396583e25a508c6c,ISIC_9596531,40,lower extremity,benign,,,serial imaging showing no change,,IL_5845882,,,,,,,,IP_4204657,,female,,,,,,,,640,480
+5e95f389396583e25a508cb1,ISIC_9637306,25,upper extremity,benign,,,serial imaging showing no change,,IL_7326797,,,,,,,,IP_6614604,,male,,,,,,,,1872,1053
+5e95f38b396583e25a508ce7,ISIC_9661108,65,palms/soles,benign,,,histopathology,,IL_8211117,,,,,,,,IP_2101945,,male,,,,,,,,1872,1053
+5e95f388396583e25a508ca5,ISIC_9756117,75,lower extremity,benign,,,serial imaging showing no change,,IL_3311529,,,,,,,,IP_2959285,,male,,,,,,,,1872,1053
+5e95f384396583e25a508c31,ISIC_9854912,45,head/neck,benign,,,serial imaging showing no change,,IL_4485232,,,,,,,,IP_9711347,,male,,,,,,,,1872,1053
+5e95f383396583e25a508c25,ISIC_9862801,35,upper extremity,benign,,,serial imaging showing no change,,IL_8799825,,,,,,,,IP_6977878,,male,,,,,,,,640,480
+5e95f384396583e25a508c40,ISIC_9868388,45,lower extremity,benign,,,serial imaging showing no change,,IL_7948357,,,,,,,,IP_7997841,,male,,,,,,,,1872,1053
+5e95f38b396583e25a508cde,ISIC_9907084,35,posterior torso,benign,,,serial imaging showing no change,,IL_7877312,,,,,,,,IP_7180935,,female,,,,,,,,640,480
+5e95f386396583e25a508c63,ISIC_9927067,25,anterior torso,benign,,,serial imaging showing no change,,IL_7123243,,,,,,,,IP_7468494,,male,,,,,,,,1872,1053
+5e95f387396583e25a508c90,ISIC_9950866,60,upper extremity,benign,,,serial imaging showing no change,,IL_2007673,,,,,,,,IP_0787478,,male,,,,,,,,640,480
+5e95f388396583e25a508c9f,ISIC_9975260,40,anterior torso,benign,,,histopathology,,IL_5025537,,,,,,,,IP_5474292,,male,,,,,,,,1872,1053

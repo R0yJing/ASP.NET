@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MelanomaClassification.Views.ViewCamera"
+             Title="Camera"
+             >
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <Label FontSize="Medium" x:Name="InfoLabel" Text="Please wait while camera is being launched..."/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

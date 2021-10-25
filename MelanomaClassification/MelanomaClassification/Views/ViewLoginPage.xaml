@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MelanomaClassification.Views.ViewLoginPage" Title="EZ Melanoma Classifier"
+             BackgroundColor="LightGreen">
+
+    
+    <ContentPage.Content>
+        
+        <Grid>
+            <StackLayout x:Name="mainScreen">
+                <Label/>
+                
+                <Entry x:Name="UsernameEntry"  Placeholder="Enter email"/>
+                <Entry x:Name="PasswordEntry"  Placeholder="Enter password" IsPassword="True" />
+               
+                <Button BackgroundColor="White" HorizontalOptions="CenterAndExpand" CornerRadius="20" TextColor="Gray" Command="{Binding OnTapLogin}" Text="Login!"/>
+                <Label />
+                <Label HorizontalTextAlignment="Center" TextDecorations="Underline" TextColor="Blue" x:Name="RegisterLink"
+                       Text="Don't have an account? Register today!" />
+            </StackLayout>
+                    <ContentView IsVisible="False" x:Name="LoggingInIndicator">
+                        <StackLayout VerticalOptions="Center">
+                            <ActivityIndicator VerticalOptions="Center" IsRunning="True"/>
+                            <Label Text="Logging in, please wait..."
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center" WidthRequest="10"/>
+                        </StackLayout>
+                    </ContentView>
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

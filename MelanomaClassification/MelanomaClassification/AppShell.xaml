@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--:local is the namespace in which the current class is declared-->
+<!--xmlns namespace refer to URIs. Owned by Xamarin and Microsoft, and they basically
+    function as version identifiers
+    means tag defined refer to classes in Xamarin.Forms, for example the Content page. 
+    The second defines a prefix of x. This is used for several elements and attributes that
+    are intrinsic to XAML itself
+    
+    The local namespace decl allows you to access other classes from the .NET std lib
+    The x:Class attribute can only appear in the root element of XAML to define a derived
+    class. This is the only new class defined in the XAML file. Everything else that appears in
+    the XAML file is instead instantiated from existing claases and initialised
+    -->
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MelanomaClassification.Views"
+       Title="MelanomaClassification"
+       x:Class="MelanomaClassification.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+    <TabBar x:Name="AfterLogin" IsVisible="False"  >
+        <Tab Title="My Account" x:Name="AccountTab">
+            <ShellContent ContentTemplate="{DataTemplate local:ViewAccountPage}"
+                          Route="ViewAccountPage"/>
+            
+        </Tab>
+        <Tab Title="Camera" x:Name="CameraTab" IsVisible="True">
+            <ShellContent ContentTemplate="{DataTemplate local:ViewCamera}" />
+        </Tab>
+        <Tab Title="Import" x:Name="ImportTab">
+           
+            <ShellContent Route="ViewPhotoGallery" ContentTemplate="{DataTemplate local:ViewPhotoGallery}" />
+        </Tab>
+
+        <Tab Title="About" x:Name="AboutTab" Icon="" FlyoutIcon="">
+            <ShellContent ContentTemplate="{DataTemplate local:ViewAboutPage}" />
+        </Tab>
+    </TabBar>
+
+
+
+    <ShellContent x:Name ="OnLogin" ContentTemplate="{DataTemplate local:ViewLoginPage}" Route="ViewLoginPage" />
+
+    <!--
+        If you would like to navigate to this content you can do so by calling
+        await Shell.Current.GoToAsync("//LoginPage");
+    -->
+
+
+
+</Shell>
